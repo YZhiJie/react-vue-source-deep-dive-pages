@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.02 · React 第 2 话：Element 与 Fiber（剧本与演出档案）
+       画布 1200x800；布局：横幅 0-96 / 格1、2 y=124-404 / 格3 y=424-636 / 知识条 656-768
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#61dafb"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · React 篇</text>
+  <text class="t bttl" x="40" y="74">第 2 话 · Element 与 Fiber：剧本与演出档案</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#61dafb"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.02</text>
+
+  <!-- ============ 格 1：剧本 ReactElement ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 剧本 ReactElement</text>
+
+  <!-- 阿R 的气泡 -->
+  <rect x="64" y="168" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="92" y="185" text-anchor="middle">阿R</text>
+  <rect x="64" y="174" width="264" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="150,264 182,264 164,286" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="151" y="258" width="30" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="80" y="200">剧本只写这一幕演什么</text>
+  <text class="t dlg" x="80" y="224">写完就不许改——不可变</text>
+  <text class="t dlg" x="80" y="248">想改？请写新剧本</text>
+
+  <!-- 阿R（编剧版：手持剧本卷轴） -->
+  <g transform="translate(170,342)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+    <rect x="-64" y="10" width="34" height="44" rx="6" fill="#fef9c3" stroke="#b45309" stroke-width="2.5"/>
+    <ellipse cx="-64" cy="32" rx="7" ry="22" fill="#fde68a" stroke="#b45309" stroke-width="2.5"/>
+    <text x="-47" y="37" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">剧本</text>
+  </g>
+
+  <!-- 剧本只读牌 -->
+  <rect x="238" y="356" width="180" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="328" y="380" text-anchor="middle" fill="#92400e">ReactElement 只读</text>
+
+  <!-- 阿V（看戏提问） -->
+  <g transform="translate(478,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="420" y="146" width="56" height="24" rx="12" fill="#42b883"/>
+  <text class="t name" x="448" y="163" text-anchor="middle">阿V</text>
+  <rect x="420" y="174" width="140" height="42" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="448,214 476,214 460,232" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="449" y="208" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="436" y="201">想改台词咋办？</text>
+
+  <!-- ============ 格 2：演出档案 Fiber ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 演出档案 Fiber</text>
+
+  <!-- 阿R 的气泡 -->
+  <rect x="660" y="168" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="688" y="185" text-anchor="middle">阿R</text>
+  <rect x="660" y="174" width="280" height="116" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="745,288 777,288 759,306" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="746" y="282" width="30" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="676" y="200">Fiber 记录这台戏怎么演</text>
+  <text class="t dlg" x="676" y="224">child、sibling、return</text>
+  <text class="t dlg" x="676" y="248">三根指针串起全场</text>
+  <text class="t dlg" x="676" y="272">随时批注——可变</text>
+
+  <!-- 阿R（舞台监督版：手持档案卡） -->
+  <g transform="translate(770,342)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+    <rect x="30" y="10" width="34" height="44" rx="6" fill="#eef2ff" stroke="#4f46e5" stroke-width="2.5"/>
+    <line x1="36" y1="22" x2="58" y2="22" stroke="#818cf8" stroke-width="3"/>
+    <line x1="36" y1="32" x2="58" y2="32" stroke="#818cf8" stroke-width="3"/>
+    <line x1="36" y1="42" x2="52" y2="42" stroke="#818cf8" stroke-width="3"/>
+  </g>
+
+  <!-- 档案卡道具 -->
+  <rect x="974" y="310" width="150" height="72" rx="8" fill="#c7d2fe" stroke="#4f46e5" stroke-width="2.5"/>
+  <rect x="960" y="296" width="150" height="72" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2.5"/>
+  <text class="t prop" x="1035" y="326" text-anchor="middle" fill="#3730a3">Fiber 档案卡</text>
+  <text class="t prop" x="1035" y="350" text-anchor="middle" fill="#3730a3">可变工作单元</text>
+
+  <!-- ============ 格 3：双缓存两棵树 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 双缓存两棵树</text>
+
+  <!-- 阿R 的气泡 -->
+  <rect x="380" y="430" width="280" height="64" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="610,492 642,492 660,510" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="611" y="486" width="30" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="396" y="456">render 完成后一键换景</text>
+  <text class="t dlg" x="396" y="480">root.current 指向新树</text>
+
+  <!-- 两块舞台牌 -->
+  <rect x="200" y="506" width="270" height="50" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t sign" x="335" y="537" text-anchor="middle" fill="#166534">current · 正在上演</text>
+  <rect x="880" y="506" width="260" height="50" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t sign" x="1010" y="537" text-anchor="middle" fill="#1e40af">workInProgress 后台排练</text>
+  <polygon points="546,519 546,543 520,531" fill="#334155"/>
+  <polygon points="726,519 726,543 700,531" fill="#334155"/>
+
+  <!-- 换景闸刀 -->
+  <rect x="560" y="560" width="140" height="14" rx="7" fill="#94a3b8"/>
+  <circle cx="585" cy="567" r="7" fill="#475569"/>
+  <circle cx="675" cy="567" r="7" fill="#475569"/>
+  <line x1="585" y1="561" x2="664" y2="512" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="664" cy="512" r="11" fill="#fbbf24" stroke="#b45309" stroke-width="3"/>
+  <text class="t sign" x="630" y="598" text-anchor="middle" fill="#334155">换景闸刀</text>
+
+  <!-- 阿R（闸刀旁） -->
+  <g transform="translate(790,556)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+
+  <!-- 阿V（台下看戏） -->
+  <g transform="translate(130,556)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+
+  <!-- ============ 知识条：码叔划重点 ============ -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• Element 是不可变剧本：只描述演什么，用完即弃</text>
+  <text class="t sb" x="155" y="740">• Fiber 是可变演出档案：child/sibling/return 三指针串起的工作单元</text>
+  <text class="t sb" x="155" y="764">• 双缓存：后台排练 workInProgress，换景时 current 一次切换</text>
+</svg>

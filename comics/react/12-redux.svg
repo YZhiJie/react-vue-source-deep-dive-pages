@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.20 · React 第 12 话：Redux 中央账本与柜员管线
+       画布 1200x800；布局：横幅 0-96 / 格1、2 y=124-404 / 格3 y=424-636 / 知识条 656-768
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#61dafb"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · React 篇</text>
+  <text class="t bttl" x="40" y="74">第 12 话 · Redux：中央账本与柜员管线</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#61dafb"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.20</text>
+
+  <!-- ============ 格 1：乱账收归中央 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 乱账收归中央</text>
+
+  <!-- 阿V（分厅老板娘） -->
+  <g transform="translate(135,332)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="52" y="164" width="56" height="24" rx="12" fill="#42b883"/>
+  <text class="t name" x="80" y="181" text-anchor="middle">阿V</text>
+  <rect x="52" y="192" width="250" height="66" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="120,258 146,258 132,276" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="121" y="252" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="68" y="218">分厅账本乱成一锅粥！</text>
+  <text class="t dlg" x="68" y="242">改一笔账，怎么走流程？</text>
+
+  <!-- 散落的分厅小账本 -->
+  <rect x="186" y="322" width="44" height="28" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5" transform="rotate(10 208 336)"/>
+  <rect x="176" y="352" width="44" height="28" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="2.5" transform="rotate(-14 198 366)"/>
+
+  <!-- action 申请单 -->
+  <rect x="246" y="330" width="96" height="38" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="294" y="354" text-anchor="middle" fill="#1e40af">action 单</text>
+  <polygon points="344,342 344,358 362,350" fill="#334155"/>
+
+  <!-- 中央账本 store -->
+  <rect x="360" y="322" width="110" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+  <text class="t prop" x="415" y="346" text-anchor="middle" fill="#92400e">中央账本</text>
+  <text class="t prop" x="415" y="368" text-anchor="middle" fill="#92400e">store</text>
+
+  <!-- 阿R（中央账房总管） -->
+  <g transform="translate(500,336)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="322" y="138" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="350" y="155" text-anchor="middle">阿R</text>
+  <rect x="322" y="166" width="246" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="470,258 496,258 484,278" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="471" y="252" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="338" y="192">不直接改！先填 action</text>
+  <text class="t dlg" x="338" y="216">申请单交给柜员 reducer，</text>
+  <text class="t dlg" x="338" y="240">审核通过才抄上新账页</text>
+
+  <!-- ============ 格 2：柜员管线三道关 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 柜员管线三道关</text>
+
+  <!-- 异地调货单（入口） -->
+  <rect x="975" y="128" width="120" height="26" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="1035" y="146" text-anchor="middle" fill="#1e40af">异地调货单</text>
+  <polygon points="1029,154 1041,154 1035,164" fill="#334155"/>
+
+  <!-- 三道柜员窗口（纵向管线） -->
+  <rect x="960" y="164" width="150" height="50" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t sign" x="1035" y="195" text-anchor="middle" fill="#1e40af">① 风控关 m1</text>
+  <polygon points="1029,214 1041,214 1035,224" fill="#334155"/>
+  <rect x="960" y="224" width="150" height="50" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t sign" x="1035" y="255" text-anchor="middle" fill="#166534">② 审计关 m2</text>
+  <polygon points="1029,274 1041,274 1035,284" fill="#334155"/>
+  <rect x="960" y="284" width="150" height="50" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.5"/>
+  <text class="t sign" x="1035" y="307" text-anchor="middle" fill="#854d0e">③ 账房</text>
+  <text class="t prop" x="1035" y="326" text-anchor="middle" fill="#854d0e">reducer</text>
+  <polygon points="1029,334 1041,334 1035,344" fill="#334155"/>
+  <rect x="985" y="344" width="100" height="36" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="1035" y="368" text-anchor="middle" fill="#92400e">新账页</text>
+
+  <!-- 洋葱切面 -->
+  <circle cx="1132" cy="210" r="18" fill="none" stroke="#f97316" stroke-width="2.5"/>
+  <circle cx="1132" cy="210" r="11" fill="none" stroke="#f97316" stroke-width="2.5"/>
+  <circle cx="1132" cy="210" r="5" fill="#f97316"/>
+  <text class="t prop" x="1132" y="246" text-anchor="middle" fill="#c2410c">洋葱</text>
+
+  <!-- thunk 专窗：识别函数单据 -->
+  <rect x="806" y="262" width="72" height="30" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="2.5"/>
+  <text class="t prop" x="842" y="282" text-anchor="middle" fill="#5b21b6">fn()</text>
+  <polygon points="836,294 848,294 842,304" fill="#7c3aed"/>
+  <rect x="800" y="306" width="140" height="36" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text class="t prop" x="870" y="329" text-anchor="middle" fill="#5b21b6">thunk 专窗</text>
+  <path d="M 940 324 L 948 324 L 948 249 L 960 249" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+  <text class="t prop" x="870" y="362" text-anchor="middle" fill="#5b21b6">函数单据，当场代办</text>
+
+  <!-- 阿R（讲解洋葱管线） -->
+  <g transform="translate(715,340)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="624" y="162" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="652" y="179" text-anchor="middle">阿R</text>
+  <rect x="624" y="190" width="300" height="88" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="690,278 716,278 702,296" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="691" y="272" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="640" y="216">中间件是条洋葱管线，</text>
+  <text class="t dlg" x="640" y="240">每关可拦截、改写、放行，</text>
+  <text class="t dlg" x="640" y="264">全过才进到 reducer 账房</text>
+
+  <!-- ============ 格 3：订栏目与抄稿机 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 订栏目与抄稿机</text>
+
+  <!-- 分厅栏目订阅表 -->
+  <rect x="52" y="496" width="240" height="126" rx="10" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text class="t prop" x="172" y="518" text-anchor="middle" fill="#334155">分厅栏目订阅表</text>
+  <rect x="72" y="530" width="14" height="14" fill="#16a34a" stroke="#166534" stroke-width="2"/>
+  <polyline points="75,537 78,541 84,532" stroke="#ffffff" stroke-width="2" fill="none"/>
+  <text class="t prop" x="94" y="542" fill="#166534">库存栏 · 有变动</text>
+  <rect x="72" y="556" width="14" height="14" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text class="t prop" x="94" y="568" fill="#64748b">订单栏 · 没变</text>
+  <rect x="72" y="582" width="14" height="14" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text class="t prop" x="94" y="594" fill="#64748b">会员栏 · 没变</text>
+  <text class="t prop" x="72" y="614" fill="#94a3b8">没变的栏，不打扰分厅</text>
+
+  <!-- 阿V（提问） -->
+  <g transform="translate(400,556)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="340" y="432" width="260" height="54" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="400,486 426,486 412,504" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="401" y="480" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="356" y="454">账本每天重写一遍，</text>
+  <text class="t dlg" x="356" y="476">看账的人不疯了吗？</text>
+
+  <!-- 阿R（解答 useSelector） -->
+  <g transform="translate(700,556)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="620" y="432" width="300" height="54" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="680,486 706,486 692,504" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="681" y="480" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="636" y="454">useSelector 订阅栏目，</text>
+  <text class="t dlg" x="636" y="476">栏没变，摇铃也不吵你</text>
+
+  <!-- Immer Proxy 抄稿机 -->
+  <text class="t prop" x="990" y="470" text-anchor="middle" fill="#4338ca">draft 涂改进</text>
+  <rect x="955" y="478" width="70" height="30" rx="4" fill="#ffffff" stroke="#4f46e5" stroke-width="2.5"/>
+  <line x1="963" y1="488" x2="1017" y2="488" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="963" y1="498" x2="1005" y2="498" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="930" y="500" width="200" height="100" rx="12" fill="#e0e7ff" stroke="#4f46e5" stroke-width="3"/>
+  <rect x="940" y="508" width="110" height="22" rx="11" fill="#4f46e5"/>
+  <text class="t chip" x="995" y="524" text-anchor="middle">createSlice</text>
+  <text class="t prop" x="1030" y="549" text-anchor="middle" fill="#312e81">Immer Proxy 抄稿机</text>
+  <circle cx="972" cy="578" r="13" fill="#c7d2fe" stroke="#4f46e5" stroke-width="2.5"/>
+  <circle cx="972" cy="578" r="5" fill="#4f46e5"/>
+  <circle cx="1002" cy="578" r="9" fill="#c7d2fe" stroke="#4f46e5" stroke-width="2.5"/>
+  <circle cx="1002" cy="578" r="3.5" fill="#4f46e5"/>
+  <rect x="1040" y="552" width="90" height="8" fill="#4f46e5"/>
+  <rect x="1045" y="560" width="80" height="46" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="1085" y="588" text-anchor="middle" fill="#92400e">新账页</text>
+  <text class="t prop" x="1035" y="626" text-anchor="middle" fill="#4338ca">涂改 draft，产出新账页</text>
+
+  <!-- ============ 知识条：码叔划重点 ============ -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• 单一账本闭包上锁：改账唯一通道是 dispatch(action)，reducer 纯函数誊写新账页</text>
+  <text class="t sb" x="155" y="740">• 中间件洋葱管线逐关放行；thunk 认出函数单据，当场代办、不进账房</text>
+  <text class="t sb" x="155" y="764">• useSelector 只订栏目、引用没变不打扰；createSlice 涂改 draft，Immer 暗中誊新页</text>
+</svg>

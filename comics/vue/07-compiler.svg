@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.17 · Vue 第 7 话：编译器，给半成品贴标签
+       画布 1200x800；布局与 Vue 篇第 1 话完全一致，主色 #42b883
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+      .stt  { font-size: 13px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#42b883"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · Vue 篇</text>
+  <text class="t bttl" x="40" y="74">第 17 话 · 编译器：给半成品贴标签</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#42b883"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.17</text>
+
+  <!-- ============ 格 1：中央厨房三段流水线 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 中央厨房三段流水线</text>
+
+  <!-- 阿V（戴厨师帽监工） -->
+  <g transform="translate(110,340)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-20" y="-62" width="40" height="16" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-14" y="-74" width="28" height="14" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  </g>
+
+  <!-- 阿V 气泡 -->
+  <rect x="52" y="164" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="80" y="181" text-anchor="middle">阿V</text>
+  <rect x="52" y="192" width="280" height="88" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="66,278 94,278 78,302" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="67" y="272" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="68" y="218">模板进来先走三站：</text>
+  <text class="t dlg" x="68" y="242">切配 AST、贴标签，</text>
+  <text class="t dlg" x="68" y="266">最后装盒成 render</text>
+
+  <!-- 传送带：三个工位 -->
+  <rect x="170" y="348" width="402" height="14" rx="7" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+  <circle cx="200" cy="366" r="7" fill="#64748b"/>
+  <circle cx="300" cy="366" r="7" fill="#64748b"/>
+  <circle cx="440" cy="366" r="7" fill="#64748b"/>
+  <circle cx="540" cy="366" r="7" fill="#64748b"/>
+
+  <rect x="178" y="276" width="120" height="60" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t stt" x="238" y="302" text-anchor="middle" fill="#1e40af">parse</text>
+  <text class="t stt" x="238" y="324" text-anchor="middle" fill="#1e40af">切配成 AST</text>
+
+  <polygon points="306,298 306,318 320,308" fill="#334155"/>
+
+  <rect x="310" y="276" width="120" height="60" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t stt" x="370" y="302" text-anchor="middle" fill="#92400e">transform</text>
+  <text class="t stt" x="370" y="324" text-anchor="middle" fill="#92400e">腌制贴标签</text>
+
+  <polygon points="438,298 438,318 452,308" fill="#334155"/>
+
+  <rect x="442" y="276" width="120" height="60" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t stt" x="502" y="302" text-anchor="middle" fill="#166534">generate</text>
+  <text class="t stt" x="502" y="324" text-anchor="middle" fill="#166534">装盒 render 函数</text>
+
+  <text class="t" x="371" y="392" text-anchor="middle" font-size="13" fill="#64748b">打包时一次性跑完，运行时直接开盒</text>
+
+  <!-- ============ 格 2：动态节点贴标签 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 动态节点贴标签</text>
+
+  <!-- 阿V（质检员，戴厨师帽） -->
+  <g transform="translate(710,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-20" y="-62" width="40" height="16" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-14" y="-74" width="28" height="14" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  </g>
+
+  <!-- 阿V 气泡 -->
+  <rect x="660" y="158" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="688" y="175" text-anchor="middle">阿V</text>
+  <rect x="660" y="186" width="250" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="690,276 718,276 702,298" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="691" y="270" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="676" y="212">质检员只给会变的</text>
+  <text class="t dlg" x="676" y="236">节点贴彩色标签，</text>
+  <text class="t dlg" x="676" y="260">静态节点一律不贴</text>
+
+  <!-- 挂牌：运行时只看标签更新 -->
+  <line x1="970" y1="150" x2="970" y2="162" stroke="#334155" stroke-width="2.5"/>
+  <line x1="1088" y1="150" x2="1088" y2="162" stroke="#334155" stroke-width="2.5"/>
+  <rect x="916" y="160" width="226" height="38" rx="8" fill="#0f172a"/>
+  <text class="t" x="1029" y="185" text-anchor="middle" font-size="17" font-weight="bold" fill="#ffffff">运行时只看标签更新</text>
+
+  <!-- 待检节点：一个静态，两个动态 -->
+  <rect x="856" y="348" width="288" height="14" rx="7" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+  <circle cx="884" cy="366" r="7" fill="#64748b"/>
+  <circle cx="1000" cy="366" r="7" fill="#64748b"/>
+  <circle cx="1116" cy="366" r="7" fill="#64748b"/>
+
+  <rect x="864" y="290" width="82" height="52" rx="8" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2.5"/>
+  <text class="t stt" x="905" y="313" text-anchor="middle" fill="#64748b">h1</text>
+  <text class="t stt" x="905" y="332" text-anchor="middle" fill="#64748b">静态</text>
+
+  <line x1="1001" y1="282" x2="1001" y2="290" stroke="#334155" stroke-width="2"/>
+  <rect x="962" y="256" width="78" height="26" rx="6" fill="#ef4444" stroke="#7f1d1d" stroke-width="2"/>
+  <text class="t" x="1001" y="274" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">TEXT = 1</text>
+  <rect x="960" y="290" width="82" height="52" rx="8" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <text class="t stt" x="1001" y="313" text-anchor="middle" fill="#0f172a">p</text>
+  <text class="t stt" x="1001" y="332" text-anchor="middle" fill="#0f172a">会变</text>
+
+  <line x1="1097" y1="282" x2="1097" y2="290" stroke="#334155" stroke-width="2"/>
+  <rect x="1058" y="256" width="78" height="26" rx="6" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+  <text class="t" x="1097" y="274" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">CLASS = 2</text>
+  <rect x="1056" y="290" width="82" height="52" rx="8" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <text class="t stt" x="1097" y="313" text-anchor="middle" fill="#0f172a">span</text>
+  <text class="t stt" x="1097" y="332" text-anchor="middle" fill="#0f172a">会变</text>
+
+  <text class="t" x="1000" y="392" text-anchor="middle" font-size="13" fill="#64748b">标签都是编译期算好的数字</text>
+
+  <!-- ============ 格 3：静态优化三件套 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 静态优化三件套</text>
+
+  <!-- 道具一：_cache 冰箱 -->
+  <rect x="64" y="482" width="272" height="128" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text class="t sign" x="80" y="508" fill="#1e40af">① 静态节点进 _cache 冰箱</text>
+  <rect x="86" y="524" width="58" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <line x1="86" y1="558" x2="144" y2="558" stroke="#2563eb" stroke-width="2"/>
+  <rect x="134" y="532" width="5" height="14" rx="2" fill="#2563eb"/>
+  <rect x="134" y="566" width="5" height="18" rx="2" fill="#2563eb"/>
+  <text class="t" x="115" y="552" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">cache</text>
+  <text class="t prop" x="158" y="556" fill="#334155">首次创建后</text>
+  <text class="t prop" x="158" y="580" fill="#334155">整块跳过</text>
+
+  <polygon points="338,540 338,564 352,552" fill="#334155"/>
+
+  <!-- 道具二：静态 props 提前摆好 -->
+  <rect x="352" y="482" width="272" height="128" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text class="t sign" x="368" y="508" fill="#92400e">② 静态 props 提前摆好</text>
+  <polygon points="384,586 524,586 510,552 398,552" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <circle cx="414" cy="564" r="8" fill="#fca5a5" stroke="#92400e" stroke-width="1.5"/>
+  <circle cx="444" cy="562" r="8" fill="#fcd34d" stroke="#92400e" stroke-width="1.5"/>
+  <circle cx="474" cy="565" r="8" fill="#86efac" stroke="#92400e" stroke-width="1.5"/>
+  <circle cx="502" cy="563" r="8" fill="#93c5fd" stroke="#92400e" stroke-width="1.5"/>
+  <text class="t prop" x="454" y="604" text-anchor="middle" fill="#334155">提升到 render 之外</text>
+
+  <polygon points="626,540 626,564 640,552" fill="#334155"/>
+
+  <!-- 道具三：连续静态节点压成 innerHTML -->
+  <rect x="640" y="482" width="272" height="128" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text class="t sign" x="656" y="508" fill="#166534">③ 连续静态节点压一块</text>
+  <line x1="690" y1="528" x2="690" y2="544" stroke="#16a34a" stroke-width="3"/>
+  <polygon points="684,544 696,544 690,552" fill="#16a34a"/>
+  <rect x="662" y="552" width="70" height="44" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t" x="697" y="572" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">innerHTML</text>
+  <text class="t" x="697" y="588" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">整块</text>
+  <text class="t prop" x="746" y="566" fill="#334155">一次生成 DOM</text>
+  <text class="t prop" x="746" y="590" fill="#334155">连 vnode 都省</text>
+
+  <!-- 阿R 来串门 -->
+  <g transform="translate(1010,552)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <rect x="880" y="430" width="230" height="42" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="990,470 1020,470 1004,488" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="991" y="464" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="896" y="457">静态的也有优化？</text>
+
+  <!-- 知识条：码叔划重点 -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• 编译器三段：parse 出 AST、transform 用 DFS 加退出回调改写打标、generate 生成 render 代码字符串</text>
+  <text class="t sb" x="155" y="740">• PatchFlag 与 dynamicProps 都在编译期算出，运行时只消费不分析</text>
+  <text class="t sb" x="155" y="764">• 3.5 静态优化：静态节点进 _cache、静态 props 提升、连续静态节点 stringify 成 innerHTML</text>
+</svg>

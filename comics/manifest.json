@@ -1,0 +1,38 @@
+{
+  "series": "源码漫画剧场",
+  "description": "React 19.3.0 × Vue 3.5.43 源码深度剖析配套漫画：18 话原创 SVG 分格漫画 + 讲解，与正文 18 章一一对应",
+  "canvas": {
+    "width": 1200,
+    "height": 800,
+    "layout": "横幅(0-96) / 格1格2(y=124-404) / 格3(y=424-636) / 知识条(y=656-768)"
+  },
+  "characters": [
+    { "name": "阿R", "role": "React 餐厅主厨，蓝色小机器人", "color": "#61dafb" },
+    { "name": "阿V", "role": "Vue 绿餐厅主厨，绿发少女", "color": "#42b883" },
+    { "name": "码叔", "role": "猫头鹰教授，每话结尾划重点", "color": "#f59e0b" }
+  ],
+  "episodes": [
+    { "ep": "EP.01", "part": "react", "chapter": 1, "title": "架构总览：餐厅后厨流水线", "comic": "react/01-architecture-overview", "doc": "docs/react/01-architecture-overview.md" },
+    { "ep": "EP.02", "part": "react", "chapter": 2, "title": "Element 与 Fiber：剧本与演出档案", "comic": "react/02-element-and-fiber", "doc": "docs/react/02-element-and-fiber.md" },
+    { "ep": "EP.03", "part": "react", "chapter": 3, "title": "Scheduler 与 Lane：急诊分诊台", "comic": "react/03-scheduler-and-lanes", "doc": "docs/react/03-scheduler-and-lanes.md" },
+    { "ep": "EP.04", "part": "react", "chapter": 4, "title": "render 阶段：可中断的深度优先遍历", "comic": "react/04-render-phase", "doc": "docs/react/04-render-phase.md" },
+    { "ep": "EP.05", "part": "react", "chapter": 5, "title": "协调与 Diff：key 事故现场", "comic": "react/05-reconciliation-diff", "doc": "docs/react/05-reconciliation-diff.md" },
+    { "ep": "EP.06", "part": "react", "chapter": 6, "title": "状态更新链路：setN 的奇幻漂流", "comic": "react/06-state-update-chain", "doc": "docs/react/06-state-update-chain.md" },
+    { "ep": "EP.07", "part": "react", "chapter": 7, "title": "Hooks：只认顺序的钩子链", "comic": "react/07-hooks", "doc": "docs/react/07-hooks.md" },
+    { "ep": "EP.08", "part": "react", "chapter": 8, "title": "commit：不可打断的上菜时刻", "comic": "react/08-commit-and-lifecycle", "doc": "docs/react/08-commit-and-lifecycle.md" },
+    { "ep": "EP.09", "part": "react", "chapter": 9, "title": "渲染器与事件：三层楼与总接待台", "comic": "react/09-renderer-and-events", "doc": "docs/react/09-renderer-and-events.md" },
+    { "ep": "EP.10", "part": "react", "chapter": 10, "title": "并发与 Suspense：能放下的半成品", "comic": "react/10-concurrent-and-suspense", "doc": "docs/react/10-concurrent-and-suspense.md" },
+    { "ep": "EP.11", "part": "vue", "chapter": 1, "title": "架构总览：中央厨房与传菜铃", "comic": "vue/01-architecture", "doc": "docs/vue/01-architecture.md" },
+    { "ep": "EP.12", "part": "vue", "chapter": 2, "title": "响应式：Link 链表心脏", "comic": "vue/02-reactivity", "doc": "docs/vue/02-reactivity.md" },
+    { "ep": "EP.13", "part": "vue", "chapter": 3, "title": "VNode 与渲染器：拼一桌模型", "comic": "vue/03-vnode-and-renderer", "doc": "docs/vue/03-vnode-and-renderer.md" },
+    { "ep": "EP.14", "part": "vue", "chapter": 4, "title": "Diff：为什么必须写 key", "comic": "vue/04-diff-algorithm", "doc": "docs/vue/04-diff-algorithm.md" },
+    { "ep": "EP.15", "part": "vue", "chapter": 5, "title": "组件的一生：从 setup 到 DOM", "comic": "vue/05-component-system", "doc": "docs/vue/05-component-system.md" },
+    { "ep": "EP.16", "part": "vue", "chapter": 6, "title": "Composition 与内置组件百宝箱", "comic": "vue/06-composition-api", "doc": "docs/vue/06-composition-api.md" },
+    { "ep": "EP.17", "part": "vue", "chapter": 7, "title": "编译器：给半成品贴标签", "comic": "vue/07-compiler", "doc": "docs/vue/07-compiler.md" },
+    { "ep": "EP.18", "part": "comparison", "chapter": 1, "title": "React vs Vue：两位厨师的做菜哲学", "comic": "comparison/react-vs-vue", "doc": "docs/comparison/react-vs-vue.md" },
+    { "ep": "EP.19", "part": "react", "chapter": 11, "title": "React Router：分厅导航台", "comic": "react/11-react-router", "doc": "docs/react/11-react-router.md" },
+    { "ep": "EP.20", "part": "react", "chapter": 12, "title": "Redux：中央账本与柜员管线", "comic": "react/12-redux", "doc": "docs/react/12-redux.md" },
+    { "ep": "EP.21", "part": "react", "chapter": 13, "title": "Zustand：公告栏与业主群", "comic": "react/13-zustand", "doc": "docs/react/13-zustand.md" },
+    { "ep": "EP.22", "part": "vue", "chapter": 8, "title": "Vue Router：楼层导览与守卫闸机", "comic": "vue/08-vue-router", "doc": "docs/vue/08-vue-router.md" }
+  ]
+}

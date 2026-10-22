@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.07 · React 第 7 话：Hooks：只认顺序的钩子链
+       画布 1200x800；布局：横幅 0-96 / 格1、2 y=124-404 / 格3 y=424-636 / 知识条 656-768
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#61dafb"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · React 篇</text>
+  <text class="t bttl" x="40" y="74">第 7 话 · Hooks：只认顺序的钩子链</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#61dafb"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.07</text>
+
+  <!-- ============ 格 1：错位事故 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 错位事故</text>
+
+  <!-- 阿V（把 Hook 写进条件的肇事者） -->
+  <g transform="translate(140,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="52" y="164" width="56" height="24" rx="12" fill="#42b883"/>
+  <text class="t name" x="80" y="181" text-anchor="middle">阿V</text>
+  <rect x="52" y="192" width="250" height="66" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="120,256 150,256 130,276" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="121" y="250" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="68" y="218">这行 hook 时有时无，</text>
+  <text class="t dlg" x="68" y="242">程序不照样能跑？</text>
+
+  <!-- 阿V 举的代码牌 -->
+  <rect x="170" y="352" width="172" height="30" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5" transform="rotate(-8 256 367)"/>
+  <text class="t prop" x="256" y="372" text-anchor="middle" fill="#92400e" transform="rotate(-8 256 367)">if 里调用 useState</text>
+
+  <!-- 阿R（举着错位钩子链抓狂） -->
+  <g transform="translate(470,342)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 抓狂符号与汗珠（角色组外的道具） -->
+  <line x1="436" y1="298" x2="426" y2="288" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+  <line x1="446" y1="292" x2="440" y2="280" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+  <line x1="504" y1="298" x2="514" y2="288" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+  <line x1="494" y1="292" x2="500" y2="280" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 432 306 Q 425 317 432 321 Q 439 317 432 306 Z" fill="#38bdf8" stroke="#0369a1" stroke-width="2"/>
+
+  <!-- 错位的钩子链道具：三个环，第三个滑出队列 -->
+  <line x1="372" y1="370" x2="380" y2="370" stroke="#334155" stroke-width="3"/>
+  <line x1="404" y1="370" x2="412" y2="370" stroke="#334155" stroke-width="3"/>
+  <circle cx="360" cy="370" r="12" fill="#ffffff" stroke="#0e7490" stroke-width="3"/>
+  <circle cx="360" cy="370" r="3.5" fill="#61dafb"/>
+  <circle cx="392" cy="370" r="12" fill="#ffffff" stroke="#0e7490" stroke-width="3"/>
+  <circle cx="392" cy="370" r="3.5" fill="#61dafb"/>
+  <circle cx="424" cy="370" r="12" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="4 3"/>
+  <line x1="419" y1="381" x2="413" y2="389" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="4 3"/>
+  <circle cx="408" cy="400" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+  <polygon points="442,346 462,346 452,326" fill="#fbbf24" stroke="#b45309" stroke-width="2.5"/>
+  <text class="t prop" x="452" y="343" text-anchor="middle" font-size="13" fill="#7c2d12">!</text>
+
+  <!-- 阿R 的气泡 -->
+  <rect x="330" y="138" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="358" y="155" text-anchor="middle">阿R</text>
+  <rect x="330" y="166" width="230" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="390,256 420,256 405,276" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="391" y="250" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="346" y="192">糟了！钩子只认顺序，</text>
+  <text class="t dlg" x="346" y="216">这一轮少了一环，</text>
+  <text class="t dlg" x="346" y="240">第二个环找不到人了！</text>
+
+  <!-- ============ 格 2：四件工服 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 四件工服</text>
+
+  <!-- 衣架：横杆与支架 -->
+  <line x1="660" y1="212" x2="920" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+  <line x1="668" y1="212" x2="668" y2="344" stroke="#334155" stroke-width="4"/>
+  <line x1="912" y1="212" x2="912" y2="344" stroke="#334155" stroke-width="4"/>
+  <line x1="654" y1="344" x2="682" y2="344" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+  <line x1="898" y1="344" x2="926" y2="344" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- 工服 1：Mount -->
+  <line x1="702" y1="212" x2="702" y2="221" stroke="#64748b" stroke-width="2.5"/>
+  <path d="M 692 231 L 702 223 L 712 231" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="673" y="232" width="58" height="74" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="702" y="261" text-anchor="middle" font-size="13" fill="#1e40af">Mount</text>
+  <text class="t prop" x="702" y="288" text-anchor="middle" font-size="13" fill="#1e40af">初次挂载</text>
+
+  <!-- 工服 2：Update -->
+  <line x1="764" y1="212" x2="764" y2="221" stroke="#64748b" stroke-width="2.5"/>
+  <path d="M 754 231 L 764 223 L 774 231" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="735" y="232" width="58" height="74" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t prop" x="764" y="261" text-anchor="middle" font-size="12" fill="#166534">Update</text>
+  <text class="t prop" x="764" y="288" text-anchor="middle" font-size="13" fill="#166534">更新</text>
+
+  <!-- 工服 3：Rerender -->
+  <line x1="826" y1="212" x2="826" y2="221" stroke="#64748b" stroke-width="2.5"/>
+  <path d="M 816 231 L 826 223 L 836 231" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="797" y="232" width="58" height="74" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.5"/>
+  <text class="t prop" x="826" y="261" text-anchor="middle" font-size="11" fill="#854d0e">Rerender</text>
+  <text class="t prop" x="826" y="288" text-anchor="middle" font-size="13" fill="#854d0e">重渲染</text>
+
+  <!-- 工服 4：ContextOnly -->
+  <line x1="888" y1="212" x2="888" y2="221" stroke="#64748b" stroke-width="2.5"/>
+  <path d="M 878 231 L 888 223 L 898 231" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="859" y="232" width="58" height="74" rx="8" fill="#fce7f3" stroke="#db2777" stroke-width="2.5"/>
+  <text class="t prop" x="888" y="257" text-anchor="middle" font-size="9.5" fill="#9d174d">ContextOnly</text>
+  <text class="t prop" x="888" y="276" text-anchor="middle" font-size="12" fill="#9d174d">只给</text>
+  <text class="t prop" x="888" y="296" text-anchor="middle" font-size="9.5" fill="#9d174d">useContext</text>
+
+  <!-- 衣架下的说明牌 -->
+  <rect x="660" y="352" width="240" height="28" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+  <text class="t prop" x="780" y="371" text-anchor="middle" fill="#075985">阶段一到，立刻换装</text>
+
+  <!-- 阿R（换装中） -->
+  <g transform="translate(1080,342)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 手里正换上的 Update 工服 -->
+  <line x1="1050" y1="322" x2="1050" y2="328" stroke="#64748b" stroke-width="2.5" transform="rotate(-10 1050 348)"/>
+  <rect x="1028" y="328" width="44" height="42" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5" transform="rotate(-10 1050 349)"/>
+  <text class="t prop" x="1050" y="354" text-anchor="middle" font-size="11" fill="#166534" transform="rotate(-10 1050 354)">Update</text>
+
+  <!-- 阿R 的气泡 -->
+  <rect x="944" y="150" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="972" y="167" text-anchor="middle">阿R</text>
+  <rect x="944" y="178" width="196" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="1020,268 1048,268 1034,288" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="1021" y="262" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="960" y="204">我有四件工服，</text>
+  <text class="t dlg" x="960" y="228">按渲染阶段换装，</text>
+  <text class="t dlg" x="960" y="252">穿错件直接报错！</text>
+
+  <!-- ============ 格 3：带位开关 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 带位开关</text>
+
+  <!-- effect 环形链道具：四张记录卡成环 -->
+  <line x1="426" y1="496" x2="446" y2="520" stroke="#94a3b8" stroke-width="2.5"/>
+  <polygon points="446,520 435,515 438,525" fill="#94a3b8"/>
+  <line x1="462" y1="561" x2="420" y2="586" stroke="#94a3b8" stroke-width="2.5"/>
+  <polygon points="420,586 431,582 429,592" fill="#94a3b8"/>
+  <line x1="340" y1="592" x2="310" y2="568" stroke="#94a3b8" stroke-width="2.5"/>
+  <polygon points="310,568 321,565 319,575" fill="#94a3b8"/>
+  <line x1="296" y1="529" x2="336" y2="500" stroke="#94a3b8" stroke-width="2.5"/>
+  <polygon points="336,500 325,499 331,509" fill="#94a3b8"/>
+  <rect x="334" y="470" width="92" height="32" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+  <text class="t prop" x="380" y="491" text-anchor="middle" font-size="13" fill="#075985">effect 2</text>
+  <rect x="438" y="529" width="92" height="32" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="2.5"/>
+  <text class="t prop" x="484" y="550" text-anchor="middle" font-size="13" fill="#334155">effect 3</text>
+  <rect x="334" y="588" width="92" height="32" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="2.5"/>
+  <text class="t prop" x="380" y="609" text-anchor="middle" font-size="13" fill="#334155">effect 4</text>
+  <rect x="230" y="529" width="92" height="32" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="2.5"/>
+  <text class="t prop" x="276" y="550" text-anchor="middle" font-size="13" fill="#334155">effect 1</text>
+  <text class="t" x="380" y="553" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">next 成环</text>
+
+  <!-- 环上的开关灯：灯灭（HasEffect 位为 0） -->
+  <line x1="380" y1="466" x2="380" y2="470" stroke="#475569" stroke-width="2.5"/>
+  <rect x="374" y="460" width="12" height="7" fill="#64748b"/>
+  <circle cx="380" cy="450" r="12" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+  <rect x="398" y="444" width="24" height="12" rx="6" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+  <circle cx="404" cy="450" r="4" fill="#475569"/>
+
+  <!-- 开关灯说明牌 -->
+  <line x1="420" y1="470" x2="546" y2="496" stroke="#0284c7" stroke-width="2" stroke-dasharray="5 4"/>
+  <rect x="546" y="470" width="316" height="66" rx="10" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <circle cx="566" cy="494" r="5" fill="#dc2626"/>
+  <text class="t prop" x="582" y="500" font-size="15" fill="#0f172a">HasEffect 位：</text>
+  <text class="t dlg" x="562" y="526">依赖没变，这次不执行</text>
+
+  <!-- 亮灯 / 灭灯对照牌 -->
+  <rect x="546" y="556" width="316" height="34" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t prop" x="562" y="578" fill="#166534">灯亮：挂载或依赖变了才执行</text>
+  <rect x="546" y="598" width="316" height="34" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2.5"/>
+  <text class="t prop" x="562" y="620" fill="#475569">灯灭：依赖没变，入环但跳过</text>
+
+  <!-- tag 位标记小卡 -->
+  <rect x="894" y="476" width="226" height="118" rx="10" fill="#fffbeb" stroke="#b45309" stroke-width="2.5"/>
+  <text class="t sign" x="910" y="502" fill="#92400e">tag 位标记</text>
+  <text class="t prop" x="910" y="528" font-size="13" fill="#78350f">1 = HasEffect 开关</text>
+  <text class="t prop" x="910" y="554" font-size="13" fill="#78350f">8 = Passive 类别</text>
+  <text class="t prop" x="910" y="580" font-size="13" fill="#78350f">按位与判断执不执行</text>
+
+  <!-- 阿R（指着环形链讲解） -->
+  <g transform="translate(150,548)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 小气泡 -->
+  <rect x="60" y="430" width="260" height="42" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="130,470 160,470 144,488" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="131" y="464" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="76" y="457">灯没亮，这环这次先跳过！</text>
+
+  <!-- ============ 知识条：码叔划重点 ============ -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• 状态挂在 fiber.memoizedState 的 hook 链表上，只认调用顺序，不能写在条件或循环里</text>
+  <text class="t sb" x="155" y="740">• react 包只是薄壳，四套 Dispatcher 按渲染阶段注入真实实现</text>
+  <text class="t sb" x="155" y="764">• useEffect 靠 tag 和 HasEffect 位标记，决定本次是否真正执行</text>
+</svg>

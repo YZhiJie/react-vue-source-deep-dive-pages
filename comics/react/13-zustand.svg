@@ -1,0 +1,241 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.21 · React 第 13 话：Zustand 公告栏与业主群
+       画布 1200x800；布局：横幅 0-96 / 格1、2 y=124-404 / 格3 y=424-636 / 知识条 656-768
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#61dafb"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · React 篇</text>
+  <text class="t bttl" x="40" y="74">第 13 话 · Zustand：公告栏与业主群</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#61dafb"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.21</text>
+
+  <!-- ============ 格 1：公告栏白板 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 公告栏白板</text>
+
+  <!-- 阿V（惊讶） -->
+  <g transform="translate(135,332)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="0" cy="2" r="4" fill="#0f172a"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="52" y="164" width="56" height="24" rx="12" fill="#42b883"/>
+  <text class="t name" x="80" y="181" text-anchor="middle">阿V</text>
+  <rect x="52" y="192" width="250" height="66" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="120,258 146,258 132,276" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="121" y="252" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="68" y="218">连 Provider 都不用包？</text>
+  <text class="t dlg" x="68" y="242">Context 也不要？</text>
+
+  <!-- 公告栏白板（挂在墙上） -->
+  <rect x="330" y="270" width="200" height="120" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="4"/>
+  <rect x="330" y="270" width="200" height="24" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+  <text class="t prop" x="430" y="287" text-anchor="middle" fill="#92400e">公告栏 · store</text>
+  <text class="t prop" x="346" y="316" fill="#334155">count: 0</text>
+  <text class="t prop" x="346" y="338" fill="#334155">user: 阿R</text>
+  <text class="t prop" x="346" y="360" fill="#334155">inc(): +1</text>
+  <circle cx="342" cy="280" r="3" fill="#dc2626"/>
+  <circle cx="518" cy="280" r="3" fill="#dc2626"/>
+
+  <!-- 阿R（举马克笔） -->
+  <g transform="translate(510,336)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+    <rect x="-46" y="-8" width="14" height="28" rx="4" fill="#dc2626" stroke="#334155" stroke-width="2.5" transform="rotate(-20 -39 6)"/>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="316" y="138" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="344" y="155" text-anchor="middle">阿R</text>
+  <rect x="316" y="166" width="252" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="470,258 496,258 484,278" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="471" y="252" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="332" y="192">create() 就一块白板，</text>
+  <text class="t dlg" x="332" y="216">state 锁在闭包里，</text>
+  <text class="t dlg" x="332" y="240">想改拿 set 马克笔直接写</text>
+
+  <!-- ============ 格 2：业主群分群 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 业主群分群</text>
+
+  <!-- 阿R 举喇叭 -->
+  <g transform="translate(700,340)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+    <polygon points="30,-30 58,-44 58,-16 30,-22" fill="#fbbf24" stroke="#78350f" stroke-width="2.5"/>
+  </g>
+  <!-- 阿R 的喇叭气泡 -->
+  <rect x="628" y="160" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="656" y="177" text-anchor="middle">阿R</text>
+  <rect x="628" y="188" width="240" height="66" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <polygon points="690,254 716,254 702,272" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <rect x="691" y="248" width="26" height="8" fill="#fef3c7"/>
+  <text class="t dlg" x="644" y="214">count 栏更新啦！</text>
+  <text class="t dlg" x="644" y="238">订了这栏的才抬头</text>
+
+  <!-- 三块业主分群牌 -->
+  <rect x="806" y="178" width="140" height="56" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t sign" x="876" y="201" text-anchor="middle" fill="#166534">count 群</text>
+  <text class="t prop" x="876" y="222" text-anchor="middle" fill="#166534">✓ 抬头重渲染</text>
+
+  <rect x="960" y="178" width="140" height="56" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2.5"/>
+  <text class="t sign" x="1030" y="201" text-anchor="middle" fill="#64748b">user 群</text>
+  <text class="t prop" x="1030" y="222" text-anchor="middle" fill="#64748b">✗ 没订，继续睡</text>
+
+  <rect x="806" y="248" width="140" height="56" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2.5"/>
+  <text class="t sign" x="876" y="271" text-anchor="middle" fill="#64748b">theme 群</text>
+  <text class="t prop" x="876" y="292" text-anchor="middle" fill="#64748b">✗ 没订，继续睡</text>
+
+  <!-- useShallow 浅比较尺 -->
+  <rect x="960" y="248" width="140" height="56" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+  <text class="t sign" x="1030" y="271" text-anchor="middle" fill="#5b21b6">useShallow 尺</text>
+  <text class="t prop" x="1030" y="292" text-anchor="middle" fill="#5b21b6">只比一层</text>
+
+  <!-- selector 小票 -->
+  <rect x="806" y="318" width="294" height="40" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="953" y="343" text-anchor="middle" fill="#1e40af">useStore(s =&gt; s.count) 只订 count 栏</text>
+
+  <!-- 阿V 探头 -->
+  <g transform="translate(760,368)">
+    <circle cx="0" cy="-14" r="24" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-11" r="19" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <path d="M -24 -18 Q 0 -50 24 -18 L 24 -8 Q 12 -26 0 -26 Q -12 -26 -24 -8 Z" fill="#0ea56d" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-7" cy="-13" r="3" fill="#0f172a"/>
+    <circle cx="7" cy="-13" r="3" fill="#0f172a"/>
+    <path d="M -5 -3 Q 0 1 5 -3" stroke="#0f172a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- ============ 格 3：persist 保险柜 + hydration ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · persist 保险柜与 hydration</text>
+
+  <!-- 左侧：白板拍照 -->
+  <rect x="70" y="496" width="180" height="112" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="3"/>
+  <rect x="70" y="496" width="180" height="22" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="160" y="512" text-anchor="middle" fill="#92400e">白板 state</text>
+  <text class="t prop" x="86" y="540" fill="#334155">count: 42</text>
+  <text class="t prop" x="86" y="562" fill="#334155">user: 阿R</text>
+  <text class="t prop" x="86" y="584" fill="#94a3b8">tmpDraft: ...</text>
+
+  <!-- partialize 剪刀 -->
+  <polygon points="268,552 282,540 282,564" fill="#dc2626"/>
+  <circle cx="270" cy="546" r="4" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <circle cx="270" cy="558" r="4" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <text class="t prop" x="272" y="586" fill="#dc2626">partialize</text>
+  <text class="t prop" x="272" y="604" fill="#dc2626">挑字段</text>
+
+  <!-- 中间：拍照箭头 -->
+  <polygon points="320,548 320,568 348,558" fill="#334155"/>
+  <text class="t prop" x="330" y="538" fill="#334155">拍照</text>
+
+  <!-- 保险柜 -->
+  <rect x="370" y="492" width="200" height="118" rx="12" fill="#475569" stroke="#1e293b" stroke-width="4"/>
+  <rect x="384" y="506" width="172" height="90" rx="8" fill="#64748b" stroke="#1e293b" stroke-width="3"/>
+  <circle cx="470" cy="551" r="24" fill="#334155" stroke="#0f172a" stroke-width="3"/>
+  <circle cx="470" cy="551" r="14" fill="#fbbf24" stroke="#78350f" stroke-width="2.5"/>
+  <line x1="470" y1="541" x2="470" y2="561" stroke="#78350f" stroke-width="3"/>
+  <line x1="460" y1="551" x2="480" y2="551" stroke="#78350f" stroke-width="3"/>
+  <text class="t chip" x="470" y="624" text-anchor="middle">localStorage</text>
+
+  <!-- 刷新循环箭头 -->
+  <path d="M 600 552 Q 640 522 680 552" stroke="#2563eb" stroke-width="3" fill="none"/>
+  <polygon points="680,544 692,552 680,560" fill="#2563eb"/>
+  <text class="t prop" x="640" y="516" fill="#1e40af">刷新</text>
+
+  <!-- 右侧：hydration 贴回去 -->
+  <rect x="720" y="496" width="200" height="112" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="3"/>
+  <rect x="720" y="496" width="200" height="22" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t prop" x="820" y="512" text-anchor="middle" fill="#166534">hydration 贴回</text>
+  <text class="t prop" x="736" y="540" fill="#334155">count: 42 ✓</text>
+  <text class="t prop" x="736" y="562" fill="#334155">user: 阿R ✓</text>
+  <text class="t prop" x="736" y="584" fill="#94a3b8">tmpDraft: 没了</text>
+
+  <!-- 阿R（指着保险柜） -->
+  <g transform="translate(1000,556)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="950" y="432" width="200" height="54" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="1000,486 1026,486 1012,504" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="1001" y="480" width="26" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="966" y="454">persist 包一层 set，</text>
+  <text class="t dlg" x="966" y="476">每次写完顺手存个照</text>
+
+  <!-- ============ 知识条：码叔划重点 ============ -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• create() 一块白板：state 锁在 vanilla 闭包，set 合并 + 通知 listeners，无 Provider 无 Context</text>
+  <text class="t sb" x="155" y="740">• selector 订栏目 + Object.is 浅比较；返回对象/数组记得套 useShallow，否则每次摇铃都重渲染</text>
+  <text class="t sb" x="155" y="764">• persist 中间件包装 set：写完拍照存 localStorage，刷新走 hydration 贴回；partialize 挑要存的字段</text>
+</svg>

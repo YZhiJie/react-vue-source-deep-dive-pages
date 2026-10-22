@@ -1,0 +1,304 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.14 · Vue 第 4 话：Diff 为什么必须写 key
+       画布 1200x800；布局与第 1 话完全一致，主色 Vue 绿
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#42b883"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · Vue 篇</text>
+  <text class="t bttl" x="40" y="74">第 14 话 · Diff：为什么必须写 key</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#42b883"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.14</text>
+
+  <!-- ============ 格 1：无 key 错位现场 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 无 key 错位现场</text>
+
+  <!-- 阿R 来客串服务员，整组从第 1 话复制只改 transform -->
+  <g transform="translate(110,342)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 震惊闪电（道具） -->
+  <polygon points="150,282 162,278 156,292 168,288 154,306 160,294 148,298" fill="#f59e0b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- 阿R 气泡 -->
+  <rect x="52" y="164" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="80" y="181" text-anchor="middle">阿R</text>
+  <rect x="52" y="192" width="250" height="88" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="100,278 128,278 112,298" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="101" y="272" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="68" y="218">新客人插到队首，我</text>
+  <text class="t dlg" x="68" y="242">照座位号端菜，结果</text>
+  <text class="t dlg" x="68" y="266">全桌的菜都错了！</text>
+
+  <!-- 红色提示牌 -->
+  <rect x="336" y="170" width="214" height="30" rx="15" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text class="t prop" x="443" y="190" text-anchor="middle" fill="#b91c1c">无 key：只认座位号</text>
+
+  <!-- 旧队：三位旧客人 -->
+  <text class="t prop" x="250" y="256" text-anchor="end" fill="#475569">旧队</text>
+  <rect x="272" y="232" width="56" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t" x="300" y="257" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e3a8a">A</text>
+  <rect x="352" y="232" width="56" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t" x="380" y="257" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e3a8a">B</text>
+  <rect x="432" y="232" width="56" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t" x="460" y="257" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e3a8a">C</text>
+
+  <!-- 错位红箭头：按座位号上菜，A 的菜去了 X 的座 -->
+  <line x1="300" y1="270" x2="254" y2="313" stroke="#dc2626" stroke-width="2.5"/>
+  <polygon points="248,305 260,303 254,315" fill="#dc2626"/>
+  <line x1="380" y1="270" x2="324" y2="313" stroke="#dc2626" stroke-width="2.5"/>
+  <polygon points="318,305 330,303 324,315" fill="#dc2626"/>
+  <line x1="460" y1="270" x2="394" y2="313" stroke="#dc2626" stroke-width="2.5"/>
+  <polygon points="388,305 400,303 394,315" fill="#dc2626"/>
+  <text class="t" x="430" y="292" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">按号上菜</text>
+
+  <!-- 座位表（DOM） -->
+  <rect x="190" y="310" width="360" height="86" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="222" y="318" width="56" height="36" rx="8" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"/>
+  <text class="t" x="250" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#9a3412">X</text>
+  <circle cx="234" cy="312" r="11" fill="#dc2626"/>
+  <text class="t" x="234" y="316" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">新</text>
+  <rect x="292" y="318" width="56" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t" x="320" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">A</text>
+  <rect x="362" y="318" width="56" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t" x="390" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">B</text>
+  <rect x="432" y="318" width="56" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text class="t" x="460" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">C</text>
+  <text class="t" x="250" y="374" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">0号</text>
+  <text class="t" x="320" y="374" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">1号</text>
+  <text class="t" x="390" y="374" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">2号</text>
+  <text class="t" x="460" y="374" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">3号新建</text>
+
+  <!-- ============ 格 2：key 是身份证 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · key 是身份证</text>
+
+  <!-- 阿V 发胸牌，整组从第 1 话复制只改 transform -->
+  <g transform="translate(720,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-20" y="-62" width="40" height="16" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-14" y="-74" width="28" height="14" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 飞出的胸牌（道具） -->
+  <path d="M 752 330 Q 762 310 778 304" stroke="#16a34a" stroke-width="2" stroke-dasharray="3 3" fill="none"/>
+  <rect x="776" y="290" width="48" height="22" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="800" y="305" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">胸牌</text>
+
+  <!-- 阿V 气泡 -->
+  <rect x="632" y="164" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="660" y="181" text-anchor="middle">阿V</text>
+  <rect x="632" y="192" width="256" height="88" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="710,278 738,278 722,298" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="711" y="272" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="648" y="218">给每位客人发胸牌，</text>
+  <text class="t dlg" x="648" y="242">服务员对牌不认座，</text>
+  <text class="t dlg" x="648" y="266">队首只加新人一个</text>
+
+  <!-- 绿色提示牌 -->
+  <rect x="906" y="170" width="226" height="30" rx="15" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text class="t prop" x="1019" y="190" text-anchor="middle" fill="#166534">有 key：认牌不认座</text>
+
+  <!-- 旧队：人人戴胸牌 -->
+  <text class="t prop" x="852" y="256" text-anchor="end" fill="#475569">旧队</text>
+  <rect x="872" y="232" width="56" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t" x="900" y="257" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e3a8a">A</text>
+  <rect x="942" y="232" width="56" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t" x="970" y="257" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e3a8a">B</text>
+  <rect x="1012" y="232" width="56" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t" x="1040" y="257" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e3a8a">C</text>
+  <rect x="878" y="276" width="44" height="18" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="900" y="289" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">key A</text>
+  <rect x="948" y="276" width="44" height="18" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="970" y="289" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">key B</text>
+  <rect x="1018" y="276" width="44" height="18" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="1040" y="289" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">key C</text>
+
+  <!-- 新客人：新挂一位 -->
+  <text class="t" x="842" y="224" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">新客人</text>
+  <rect x="814" y="232" width="56" height="36" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <text class="t" x="842" y="257" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">X</text>
+  <line x1="842" y1="270" x2="850" y2="313" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <polygon points="844,305 856,305 850,316" fill="#16a34a"/>
+
+  <!-- 对号入座绿箭头 -->
+  <line x1="900" y1="296" x2="920" y2="313" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="914,305 926,303 920,316" fill="#16a34a"/>
+  <line x1="970" y1="296" x2="990" y2="313" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="984,305 996,303 990,316" fill="#16a34a"/>
+  <line x1="1040" y1="296" x2="1060" y2="313" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="1054,305 1066,303 1060,316" fill="#16a34a"/>
+
+  <!-- 新座位表 -->
+  <rect x="812" y="310" width="318" height="86" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <rect x="822" y="318" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t" x="850" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">X</text>
+  <rect x="892" y="318" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t" x="920" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">A</text>
+  <rect x="962" y="318" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t" x="990" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">B</text>
+  <rect x="1032" y="318" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t" x="1060" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">C</text>
+  <rect x="830" y="358" width="40" height="18" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="850" y="371" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">keyX</text>
+  <rect x="900" y="358" width="40" height="18" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="920" y="371" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">keyA</text>
+  <rect x="970" y="358" width="40" height="18" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="990" y="371" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">keyB</text>
+  <rect x="1040" y="358" width="40" height="18" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="1060" y="371" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">keyC</text>
+  <text class="t" x="850" y="392" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">0号新挂</text>
+  <text class="t" x="920" y="392" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">1号</text>
+  <text class="t" x="990" y="392" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">2号</text>
+  <text class="t" x="1060" y="392" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">3号</text>
+
+  <!-- ============ 格 3：头尾夹击 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 头尾夹击</text>
+
+  <!-- 图例小牌 -->
+  <rect x="560" y="436" width="120" height="24" rx="12" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text class="t" x="620" y="452" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">i：旧头·新头</text>
+  <rect x="690" y="436" width="104" height="24" rx="12" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text class="t" x="742" y="452" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">e1：旧尾</text>
+  <rect x="804" y="436" width="104" height="24" rx="12" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text class="t" x="856" y="452" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">e2：新尾</text>
+  <rect x="918" y="436" width="200" height="24" rx="12" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text class="t" x="1018" y="452" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">夹住中间乱序段</text>
+
+  <!-- 旧队 a b c d e -->
+  <text class="t prop" x="170" y="523" text-anchor="end" fill="#475569">旧队</text>
+  <rect x="202" y="500" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text class="t" x="230" y="525" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">a</text>
+  <rect x="272" y="500" width="56" height="36" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text class="t" x="300" y="525" text-anchor="middle" font-size="20" font-weight="bold" fill="#475569">b</text>
+  <rect x="342" y="500" width="56" height="36" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text class="t" x="370" y="525" text-anchor="middle" font-size="20" font-weight="bold" fill="#475569">c</text>
+  <rect x="412" y="500" width="56" height="36" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text class="t" x="440" y="525" text-anchor="middle" font-size="20" font-weight="bold" fill="#475569">d</text>
+  <rect x="482" y="500" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text class="t" x="510" y="525" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">e</text>
+
+  <!-- 新队 a d b c e -->
+  <text class="t prop" x="170" y="591" text-anchor="end" fill="#475569">新队</text>
+  <rect x="202" y="568" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text class="t" x="230" y="593" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">a</text>
+  <rect x="272" y="568" width="56" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t" x="300" y="593" text-anchor="middle" font-size="20" font-weight="bold" fill="#92400e">d</text>
+  <rect x="342" y="568" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text class="t" x="370" y="593" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">b</text>
+  <rect x="412" y="568" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text class="t" x="440" y="593" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">c</text>
+  <rect x="482" y="568" width="56" height="36" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text class="t" x="510" y="593" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">e</text>
+
+  <!-- 四个指针牌 -->
+  <rect x="202" y="468" width="56" height="20" rx="6" fill="#16a34a"/>
+  <text class="t" x="230" y="482" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">旧头</text>
+  <polygon points="225,492 235,492 230,499" fill="#16a34a"/>
+  <rect x="482" y="468" width="56" height="20" rx="6" fill="#16a34a"/>
+  <text class="t" x="510" y="482" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">旧尾</text>
+  <polygon points="505,492 515,492 510,499" fill="#16a34a"/>
+  <polygon points="225,612 235,612 230,605" fill="#16a34a"/>
+  <rect x="202" y="612" width="56" height="20" rx="6" fill="#16a34a"/>
+  <text class="t" x="230" y="626" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">新头</text>
+  <polygon points="505,612 515,612 510,605" fill="#16a34a"/>
+  <rect x="482" y="612" width="56" height="20" rx="6" fill="#16a34a"/>
+  <text class="t" x="510" y="626" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">新尾</text>
+
+  <!-- 头尾相同：原地 patch -->
+  <line x1="230" y1="538" x2="230" y2="564" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="225,556 235,556 230,566" fill="#16a34a"/>
+  <line x1="510" y1="538" x2="510" y2="564" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="505,556 515,556 510,566" fill="#16a34a"/>
+  <!-- 中段：b c 不动（在 LIS 上），d 移动 -->
+  <line x1="300" y1="538" x2="368" y2="564" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="362,556 374,555 370,566" fill="#16a34a"/>
+  <line x1="370" y1="538" x2="438" y2="564" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="432,556 444,555 440,566" fill="#16a34a"/>
+  <line x1="440" y1="538" x2="302" y2="564" stroke="#d97706" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <polygon points="296,556 308,556 302,566" fill="#d97706"/>
+
+  <!-- 右侧主牌：最长递增子序列 -->
+  <rect x="620" y="478" width="500" height="64" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text class="t" x="870" y="508" text-anchor="middle" font-size="22" font-weight="bold" fill="#166534">最长递增子序列</text>
+  <text class="t" x="870" y="534" text-anchor="middle" font-size="17" font-weight="bold" fill="#166534">不动的人最多</text>
+
+  <!-- 新中段示意 d b c -->
+  <text class="t prop" x="626" y="606" fill="#475569">新中段</text>
+  <text class="t" x="700" y="578" text-anchor="middle" font-size="11" font-weight="bold" fill="#b45309">移动</text>
+  <rect x="677" y="582" width="46" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t" x="700" y="605" text-anchor="middle" font-size="18" font-weight="bold" fill="#92400e">d</text>
+  <text class="t" x="756" y="578" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">不动</text>
+  <rect x="733" y="582" width="46" height="34" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t" x="756" y="605" text-anchor="middle" font-size="18" font-weight="bold" fill="#166534">b</text>
+  <text class="t" x="812" y="578" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">不动</text>
+  <rect x="789" y="582" width="46" height="34" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t" x="812" y="605" text-anchor="middle" font-size="18" font-weight="bold" fill="#166534">c</text>
+  <text class="t" x="860" y="596" font-size="13" font-weight="bold" fill="#166534">绿色：在 LIS 上原地不动</text>
+  <text class="t" x="860" y="618" font-size="13" font-weight="bold" fill="#b45309">橙色：只移动 d 一人即可</text>
+
+  <!-- 知识条：码叔划重点 -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• patchChildren 按新旧子节点是 text/array/null 组成九种组合分派</text>
+  <text class="t sb" x="155" y="740">• 无 key 按位置复用，头部插入会让整列 state 与 DOM 错位</text>
+  <text class="t sb" x="155" y="764">• 有 key 先头尾夹击处理相同节点，乱序部分用最长递增子序列最小化移动</text>
+</svg>

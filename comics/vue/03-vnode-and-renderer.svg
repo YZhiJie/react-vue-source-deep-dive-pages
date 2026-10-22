@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.13 · Vue 第 3 话：VNode 与渲染器（拼一桌模型）
+       画布 1200x800；布局与第 1 话完全一致，主色 Vue 绿
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#42b883"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · Vue 篇</text>
+  <text class="t bttl" x="40" y="74">第 13 话 · VNode 与渲染器：拼一桌模型</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#42b883"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.13</text>
+
+  <!-- ============ 格 1：菜单变模型（render 产出 VNode） ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 菜单变模型</text>
+
+  <!-- 阿V 端着 VNode 拼盘（角色整段复用，仅改 transform） -->
+  <g transform="translate(150,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="24" y="-8" width="70" height="10" rx="5" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <circle cx="40" cy="-20" r="9" fill="#fca5a5" stroke="#334155" stroke-width="2"/>
+    <circle cx="62" cy="-20" r="9" fill="#fcd34d" stroke="#334155" stroke-width="2"/>
+    <circle cx="84" cy="-20" r="9" fill="#86efac" stroke="#334155" stroke-width="2"/>
+  </g>
+
+  <!-- 模板卡片 -->
+  <rect x="300" y="215" width="114" height="104" rx="8" fill="#ffffff" stroke="#42b883" stroke-width="2.5"/>
+  <rect x="300" y="215" width="114" height="22" rx="8" fill="#dcfce7"/>
+  <rect x="300" y="229" width="114" height="8" fill="#dcfce7"/>
+  <text class="t" x="357" y="231" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">模板卡片</text>
+  <text class="t" x="312" y="258" font-size="12" fill="#334155">div 卡片</text>
+  <text class="t" x="320" y="280" font-size="12" fill="#334155">span 数字</text>
+  <text class="t" x="320" y="302" font-size="12" fill="#334155">button 加一</text>
+
+  <!-- render 箭头与 VNode 树模型 -->
+  <text class="t" x="429" y="205" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">render()</text>
+  <polygon points="420,248 420,260 438,254" fill="#334155"/>
+  <line x1="468" y1="246" x2="446" y2="276" stroke="#334155" stroke-width="2.5"/>
+  <line x1="468" y1="246" x2="468" y2="276" stroke="#334155" stroke-width="2.5"/>
+  <line x1="468" y1="246" x2="492" y2="276" stroke="#334155" stroke-width="2.5"/>
+  <circle cx="468" cy="233" r="15" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+  <text class="t" x="468" y="237" text-anchor="middle" font-size="9" font-weight="bold" fill="#ffffff">VNode</text>
+  <circle cx="446" cy="286" r="9" fill="#fca5a5" stroke="#334155" stroke-width="2"/>
+  <circle cx="468" cy="286" r="9" fill="#fcd34d" stroke="#334155" stroke-width="2"/>
+  <circle cx="492" cy="286" r="9" fill="#86efac" stroke="#334155" stroke-width="2"/>
+  <rect x="430" y="300" width="78" height="8" rx="4" fill="#94a3b8" stroke="#334155" stroke-width="1.5"/>
+  <line x1="438" y1="308" x2="438" y2="322" stroke="#334155" stroke-width="2"/>
+  <line x1="500" y1="308" x2="500" y2="322" stroke="#334155" stroke-width="2"/>
+
+  <!-- 阿V 气泡 -->
+  <rect x="48" y="164" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="76" y="181" text-anchor="middle">阿V</text>
+  <rect x="48" y="192" width="232" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="120,282 148,282 132,302" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="121" y="276" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="64" y="218">模板卡片丢进 render</text>
+  <text class="t dlg" x="64" y="242">函数一跑，就拼成</text>
+  <text class="t dlg" x="64" y="266">一桌 VNode 树模型</text>
+
+  <!-- ============ 格 2：patch 对比两桌（ShapeFlags 分派） ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · patch 对比两桌</text>
+
+  <!-- 分派牌 -->
+  <rect x="880" y="184" width="264" height="28" rx="8" fill="#0f172a"/>
+  <text class="t" x="1012" y="203" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">patch 旧,新：按 ShapeFlags 分派</text>
+
+  <!-- 旧桌 VNode -->
+  <text class="t" x="700" y="292" text-anchor="middle" font-size="13" font-weight="bold" fill="#475569">旧桌 VNode</text>
+  <line x1="700" y1="324" x2="676" y2="345" stroke="#334155" stroke-width="2.5"/>
+  <line x1="700" y1="324" x2="700" y2="345" stroke="#334155" stroke-width="2.5"/>
+  <line x1="700" y1="324" x2="724" y2="345" stroke="#334155" stroke-width="2.5"/>
+  <circle cx="700" cy="312" r="12" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+  <circle cx="676" cy="354" r="9" fill="#fca5a5" stroke="#334155" stroke-width="2"/>
+  <circle cx="700" cy="354" r="9" fill="#fcd34d" stroke="#334155" stroke-width="2"/>
+  <circle cx="700" cy="354" r="13" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4 3"/>
+  <circle cx="724" cy="354" r="9" fill="#86efac" stroke="#334155" stroke-width="2"/>
+  <rect x="660" y="368" width="80" height="8" rx="4" fill="#94a3b8" stroke="#334155" stroke-width="1.5"/>
+  <line x1="668" y1="376" x2="668" y2="394" stroke="#334155" stroke-width="2"/>
+  <line x1="732" y1="376" x2="732" y2="394" stroke="#334155" stroke-width="2"/>
+
+  <!-- 新桌 VNode -->
+  <text class="t" x="1024" y="292" text-anchor="middle" font-size="13" font-weight="bold" fill="#475569">新桌 VNode</text>
+  <line x1="1024" y1="324" x2="1000" y2="345" stroke="#334155" stroke-width="2.5"/>
+  <line x1="1024" y1="324" x2="1024" y2="345" stroke="#334155" stroke-width="2.5"/>
+  <line x1="1024" y1="324" x2="1048" y2="345" stroke="#334155" stroke-width="2.5"/>
+  <circle cx="1024" cy="312" r="12" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+  <circle cx="1000" cy="354" r="9" fill="#fca5a5" stroke="#334155" stroke-width="2"/>
+  <circle cx="1024" cy="354" r="9" fill="#818cf8" stroke="#334155" stroke-width="2"/>
+  <circle cx="1024" cy="354" r="13" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="4 3"/>
+  <circle cx="1048" cy="354" r="9" fill="#86efac" stroke="#334155" stroke-width="2"/>
+  <rect x="984" y="368" width="80" height="8" rx="4" fill="#94a3b8" stroke="#334155" stroke-width="1.5"/>
+  <line x1="992" y1="376" x2="992" y2="394" stroke="#334155" stroke-width="2"/>
+  <line x1="1056" y1="376" x2="1056" y2="394" stroke="#334155" stroke-width="2"/>
+
+  <!-- 阿V 端着替换零件（角色整段复用，仅改 transform） -->
+  <g transform="translate(800,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="24" y="-8" width="70" height="10" rx="5" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <circle cx="40" cy="-20" r="9" fill="#fca5a5" stroke="#334155" stroke-width="2"/>
+    <circle cx="62" cy="-20" r="9" fill="#fcd34d" stroke="#334155" stroke-width="2"/>
+    <circle cx="84" cy="-20" r="9" fill="#86efac" stroke="#334155" stroke-width="2"/>
+  </g>
+  <!-- 换件路线：托盘到新桌 -->
+  <line x1="896" y1="330" x2="984" y2="346" stroke="#334155" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <polygon points="986,338 988,354 1000,348" fill="#334155"/>
+
+  <!-- 阿V 气泡 -->
+  <rect x="648" y="158" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="676" y="175" text-anchor="middle">阿V</text>
+  <rect x="648" y="186" width="250" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="780,276 808,276 792,298" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="781" y="270" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="664" y="212">新旧两桌模型摆在一起</text>
+  <text class="t dlg" x="664" y="236">我只换掉不一样的零件</text>
+  <text class="t dlg" x="664" y="260">其余原样摆回去</text>
+
+  <!-- ============ 格 3：只有 span 变了（Block 快路径） ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 只有 span 变了</text>
+
+  <!-- Block 牌 -->
+  <rect x="540" y="442" width="310" height="30" rx="8" fill="#0f172a"/>
+  <text class="t" x="695" y="462" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Block 只看 dynamicChildren</text>
+
+  <!-- Block 框与三个节点 -->
+  <rect x="120" y="486" width="580" height="128" rx="12" fill="#f8fafc" stroke="#42b883" stroke-width="2.5"/>
+  <rect x="136" y="476" width="64" height="20" rx="10" fill="#42b883"/>
+  <text class="t" x="168" y="490" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">Block</text>
+  <line x1="180" y1="550" x2="640" y2="550" stroke="#94a3b8" stroke-width="3"/>
+  <!-- 静态 h1：戴跳过眼罩 -->
+  <circle cx="220" cy="550" r="28" fill="#cbd5e1" stroke="#334155" stroke-width="3"/>
+  <line x1="200" y1="547" x2="190" y2="544" stroke="#334155" stroke-width="2"/>
+  <line x1="240" y1="547" x2="250" y2="544" stroke="#334155" stroke-width="2"/>
+  <rect x="200" y="540" width="40" height="14" rx="7" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+  <text class="t" x="220" y="551" text-anchor="middle" font-size="10" font-weight="bold" fill="#334155">跳过</text>
+  <text class="t" x="220" y="598" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">h1 静态</text>
+  <!-- 动态 span：贴 PatchFlag 标签、被放大镜检查 -->
+  <rect x="330" y="496" width="140" height="24" rx="6" fill="#f97316" stroke="#c2410c" stroke-width="2"/>
+  <line x1="400" y1="520" x2="400" y2="522" stroke="#c2410c" stroke-width="2"/>
+  <text class="t" x="400" y="513" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#ffffff">PatchFlag · TEXT</text>
+  <circle cx="400" cy="550" r="28" fill="#42b883" stroke="#334155" stroke-width="3"/>
+  <text class="t" x="400" y="555" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">span</text>
+  <text class="t" x="400" y="598" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">span 数字</text>
+  <circle cx="400" cy="550" r="36" fill="none" stroke="#0f172a" stroke-width="3"/>
+  <line x1="426" y1="576" x2="444" y2="594" stroke="#0f172a" stroke-width="5" stroke-linecap="round"/>
+  <!-- 静态 button：戴跳过眼罩 -->
+  <circle cx="580" cy="550" r="28" fill="#cbd5e1" stroke="#334155" stroke-width="3"/>
+  <line x1="560" y1="547" x2="550" y2="544" stroke="#334155" stroke-width="2"/>
+  <line x1="600" y1="547" x2="610" y2="544" stroke="#334155" stroke-width="2"/>
+  <rect x="560" y="540" width="40" height="14" rx="7" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+  <text class="t" x="580" y="551" text-anchor="middle" font-size="10" font-weight="bold" fill="#334155">跳过</text>
+  <text class="t" x="580" y="598" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">button 静态</text>
+
+  <!-- dynamicChildren 数组盒 -->
+  <rect x="730" y="520" width="150" height="64" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.5"/>
+  <text class="t" x="805" y="542" text-anchor="middle" font-size="12" font-weight="bold" fill="#854d0e">dynamicChildren</text>
+  <circle cx="766" cy="564" r="10" fill="#42b883" stroke="#ca8a04" stroke-width="2"/>
+  <text class="t" x="786" y="568" font-size="12" font-weight="bold" fill="#854d0e">仅 span</text>
+  <path d="M 430 528 Q 580 486 726 538" fill="none" stroke="#ca8a04" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <polygon points="716,528 732,534 718,544" fill="#ca8a04"/>
+
+  <!-- 阿R 来串门（角色整段复用，仅改 transform） -->
+  <g transform="translate(1010,552)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <rect x="880" y="430" width="230" height="42" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="990,470 1020,470 1004,488" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="991" y="464" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="896" y="457">静态节点看都不看？</text>
+
+  <!-- 知识条：码叔划重点 -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• VNode 是描述界面的普通 JS 对象，h() 是创建工厂</text>
+  <text class="t sb" x="155" y="740">• 渲染器 patch(n1,n2) 按 ShapeFlags 分派挂载或更新逻辑</text>
+  <text class="t sb" x="155" y="764">• PatchFlag 加 dynamicChildren 构成 Block 快路径，静态节点直接跳过</text>
+</svg>

@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.09 · React 第 9 话：渲染器与事件（三层楼与总接待台）
+       画布 1200x800；布局：横幅 0-96 / 格1、2 y=124-404 / 格3 y=424-636 / 知识条 656-768
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#0e7490"/>
+    </marker>
+    <marker id="arrY" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#d97706"/>
+    </marker>
+    <marker id="arrG" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#61dafb"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · React 篇</text>
+  <text class="t bttl" x="40" y="74">第 9 话 · 渲染器与事件：三层楼与总接待台</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#61dafb"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.09</text>
+
+  <!-- ============ 格 1：三层楼 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 三层楼</text>
+
+  <!-- 阿V（参观小楼的顾客） -->
+  <g transform="translate(80,346)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="46" y="168" width="56" height="24" rx="12" fill="#42b883"/>
+  <text class="t name" x="74" y="185" text-anchor="middle">阿V</text>
+  <rect x="46" y="196" width="176" height="62" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="86,256 114,256 98,278" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="87" y="250" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="62" y="222">楼里怎么分工？</text>
+  <text class="t dlg" x="62" y="246">内核认识 DOM 吗</text>
+
+  <!-- 三层楼：屋顶 -->
+  <polygon points="210,190 402,190 306,162" fill="#475569" stroke="#334155" stroke-width="2.5"/>
+  <rect x="206" y="186" width="202" height="10" rx="3" fill="#475569" stroke="#334155" stroke-width="2.5"/>
+  <!-- 三层楼：三块楼层立牌 -->
+  <rect x="224" y="196" width="172" height="44" rx="6" fill="#e0f2fe" stroke="#0e7490" stroke-width="2.5"/>
+  <text class="t prop" x="310" y="224" text-anchor="middle" font-size="12.5" fill="#0c4a6e">react 层：API 薄壳</text>
+  <rect x="224" y="244" width="172" height="44" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="310" y="272" text-anchor="middle" font-size="12.5" fill="#1e40af">reconciler 层：调度内核</text>
+  <rect x="216" y="292" width="188" height="44" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t prop" x="310" y="320" text-anchor="middle" font-size="12.5" fill="#166534">react-dom 层：Web 渲染器</text>
+  <!-- 楼座 -->
+  <rect x="290" y="336" width="40" height="56" fill="#94a3b8" stroke="#334155" stroke-width="2.5"/>
+  <rect x="245" y="392" width="130" height="10" rx="4" fill="#64748b" stroke="#334155" stroke-width="2.5"/>
+
+  <!-- 契约书道具：host config 约定方法 -->
+  <rect x="402" y="248" width="118" height="66" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+  <polygon points="498,248 520,248 520,270" fill="#fde68a" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="461" y="280" text-anchor="middle" fill="#92400e">host config</text>
+  <text class="t prop" x="461" y="302" text-anchor="middle" fill="#92400e">约定方法</text>
+  <line x1="390" y1="266" x2="400" y2="270" stroke="#d97706" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#arrY)"/>
+  <line x1="420" y1="314" x2="400" y2="296" stroke="#d97706" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#arrY)"/>
+
+  <!-- 阿R（解说三层楼） -->
+  <g transform="translate(520,346)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="412" y="138" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="440" y="155" text-anchor="middle">阿R</text>
+  <rect x="412" y="166" width="152" height="64" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="450,228 478,228 464,262" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="451" y="222" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="428" y="192">内核宿主无关，</text>
+  <text class="t dlg" x="428" y="216">平台靠契约接入</text>
+
+  <!-- ============ 格 2：大堂总接待台 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 大堂总接待台</text>
+
+  <!-- 阿V（来按按钮的顾客） -->
+  <g transform="translate(668,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="632" y="158" width="56" height="24" rx="12" fill="#42b883"/>
+  <text class="t name" x="660" y="175" text-anchor="middle">阿V</text>
+  <rect x="632" y="186" width="170" height="44" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="652,228 680,228 666,260" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="653" y="222" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="648" y="214">每层楼都要挂监听吗？</text>
+
+  <!-- 三个事件源：click / keydown / input，事件线汇聚总台 -->
+  <rect x="728" y="206" width="80" height="30" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="768" y="226" text-anchor="middle" fill="#92400e">click</text>
+  <rect x="812" y="168" width="92" height="30" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="858" y="188" text-anchor="middle" fill="#92400e">keydown</text>
+  <rect x="1036" y="244" width="80" height="30" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="1076" y="264" text-anchor="middle" fill="#92400e">input</text>
+  <line x1="808" y1="221" x2="828" y2="324" stroke="#0e7490" stroke-width="2.5" marker-end="url(#arrB)"/>
+  <line x1="858" y1="198" x2="890" y2="324" stroke="#0e7490" stroke-width="2.5" marker-end="url(#arrB)"/>
+  <line x1="1036" y1="274" x2="980" y2="324" stroke="#0e7490" stroke-width="2.5" marker-end="url(#arrB)"/>
+
+  <!-- 被划掉的 document 旧地址 -->
+  <rect x="1052" y="286" width="84" height="34" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+  <text class="t prop" x="1094" y="308" text-anchor="middle" font-size="13" fill="#991b1b">document</text>
+  <line x1="1056" y1="290" x2="1132" y2="316" stroke="#dc2626" stroke-width="2.5"/>
+  <line x1="1132" y1="290" x2="1056" y2="316" stroke="#dc2626" stroke-width="2.5"/>
+
+  <!-- 阿R（总台接待员，站在接待台后） -->
+  <g transform="translate(900,318)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="916" y="138" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="944" y="155" text-anchor="middle">阿R</text>
+  <rect x="916" y="166" width="228" height="64" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="950,228 978,228 964,256" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="951" y="222" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="932" y="192">全楼事件在总台集合，</text>
+  <text class="t dlg" x="932" y="216">document 不再插手</text>
+
+  <!-- 大堂总接待台（root 容器） -->
+  <rect x="748" y="326" width="304" height="16" rx="6" fill="#94a3b8" stroke="#334155" stroke-width="2.5"/>
+  <rect x="760" y="342" width="280" height="56" rx="8" fill="#0f172a" stroke="#334155" stroke-width="2.5"/>
+  <text class="t sign" x="900" y="366" text-anchor="middle" fill="#ffffff">事件委托挂在 root 容器</text>
+  <text class="t sign" x="900" y="389" text-anchor="middle" fill="#ffffff">不再挂 document</text>
+
+  <!-- ============ 格 3：冒泡寻人 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 冒泡寻人</text>
+
+  <!-- 阿R（敲门） -->
+  <g transform="translate(120,556)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 敲门的门与动作线 -->
+  <rect x="196" y="522" width="32" height="62" rx="4" fill="#fde68a" stroke="#92400e" stroke-width="2.5"/>
+  <circle cx="221" cy="556" r="3.5" fill="#92400e"/>
+  <line x1="168" y1="548" x2="184" y2="544" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="166" y1="560" x2="186" y2="560" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="168" y1="572" x2="184" y2="576" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <text class="t prop" x="150" y="500" text-anchor="middle" fill="#92400e">原生事件敲门</text>
+  <!-- 阿R 小气泡 -->
+  <rect x="60" y="430" width="240" height="42" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="128,470 156,470 140,490" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="129" y="464" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="76" y="457">敲门！沿 return 链寻人</text>
+
+  <!-- fiber return 链：button → ul → div → root 容器 -->
+  <rect x="244" y="540" width="156" height="44" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t sign" x="322" y="568" text-anchor="middle" font-size="13" fill="#92400e">button（目标）</text>
+  <rect x="436" y="540" width="140" height="44" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text class="t sign" x="506" y="568" text-anchor="middle" font-size="13" fill="#334155">ul</text>
+  <rect x="612" y="540" width="140" height="44" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text class="t sign" x="682" y="568" text-anchor="middle" font-size="13" fill="#334155">div</text>
+  <rect x="788" y="540" width="160" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t sign" x="868" y="568" text-anchor="middle" font-size="13" fill="#1e40af">root 容器</text>
+  <line x1="400" y1="562" x2="434" y2="562" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrG)"/>
+  <line x1="576" y1="562" x2="610" y2="562" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrG)"/>
+  <line x1="752" y1="562" x2="786" y2="562" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrG)"/>
+  <text class="t" x="417" y="555" text-anchor="middle" font-size="11" fill="#64748b">return</text>
+  <text class="t" x="593" y="555" text-anchor="middle" font-size="11" fill="#64748b">return</text>
+  <text class="t" x="769" y="555" text-anchor="middle" font-size="11" fill="#64748b">return</text>
+
+  <!-- capture 趟：根 → 目标，倒序 -->
+  <line x1="930" y1="498" x2="330" y2="498" stroke="#334155" stroke-width="2.5" marker-end="url(#arr)"/>
+  <line x1="868" y1="498" x2="868" y2="512" stroke="#334155" stroke-width="2.5"/>
+  <line x1="682" y1="498" x2="682" y2="512" stroke="#334155" stroke-width="2.5"/>
+  <rect x="550" y="486" width="240" height="20" fill="#ffffff"/>
+  <text class="t sign" x="670" y="501" text-anchor="middle" font-size="13.5" fill="#1e40af">capture 捕获：根 → 目标 · 倒序</text>
+  <rect x="630" y="512" width="104" height="22" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text class="t" x="682" y="528" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e40af">onClickCapture</text>
+  <rect x="816" y="512" width="104" height="22" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text class="t" x="868" y="528" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e40af">onClickCapture</text>
+
+  <!-- bubble 趟：目标 → 根，正序 -->
+  <line x1="330" y1="622" x2="930" y2="622" stroke="#334155" stroke-width="2.5" marker-end="url(#arr)"/>
+  <line x1="322" y1="612" x2="322" y2="622" stroke="#334155" stroke-width="2.5"/>
+  <line x1="506" y1="612" x2="506" y2="622" stroke="#334155" stroke-width="2.5"/>
+  <rect x="550" y="612" width="240" height="20" fill="#ffffff"/>
+  <text class="t sign" x="670" y="627" text-anchor="middle" font-size="13.5" fill="#166534">bubble 冒泡：目标 → 根 · 正序</text>
+  <rect x="279" y="590" width="86" height="22" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="322" y="606" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#166534">onClick</text>
+  <rect x="463" y="590" width="86" height="22" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text class="t" x="506" y="606" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#166534">onClick</text>
+
+  <!-- 阿V（右侧恍然） -->
+  <g transform="translate(1090,556)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 小气泡 -->
+  <rect x="936" y="430" width="210" height="42" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="1048,470 1076,470 1060,490" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="1049" y="464" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="952" y="457">原来冒泡是模拟的！</text>
+
+  <!-- ============ 知识条：码叔划重点 ============ -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">① 内核宿主无关：react-dom 通过 host config 一组方法反向提供 DOM 能力，换平台只需实现同一套接口</text>
+  <text class="t sb" x="155" y="740">② React 19 事件委托在 root 容器而非 document，多根树互不干扰</text>
+  <text class="t sb" x="155" y="764">③ 合成事件从目标 fiber 沿 return 链收集 listener，模拟捕获与冒泡两阶段</text>
+</svg>

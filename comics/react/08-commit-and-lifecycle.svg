@@ -1,0 +1,255 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.08 · React 第 8 话：commit 阶段（不可打断的上菜时刻）
+       画布 1200x800；布局：横幅 0-96 / 格1、2 y=124-404 / 格3 y=424-636 / 知识条 656-768
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#61dafb"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · React 篇</text>
+  <text class="t bttl" x="40" y="74">第 8 话 · commit：不可打断的上菜时刻</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#61dafb"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.08</text>
+
+  <!-- ============ 格 1：上菜四步走 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 上菜四步走</text>
+
+  <!-- 阿R 的气泡 -->
+  <rect x="60" y="168" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="88" y="185" text-anchor="middle">阿R</text>
+  <rect x="60" y="192" width="178" height="96" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="110,286 140,286 122,306" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="111" y="280" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="76" y="218">commit 一旦开始，</text>
+  <text class="t dlg" x="76" y="242">就得一口气上完，</text>
+  <text class="t dlg" x="76" y="266">四步顺序不能乱</text>
+
+  <!-- 阿R（服务员机器人） -->
+  <g transform="translate(135,336)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+
+  <!-- 上菜时间轴：四块牌 -->
+  <rect x="250" y="168" width="270" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <circle cx="272" cy="190" r="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text class="t prop" x="272" y="195" text-anchor="middle" font-size="12" fill="#1e40af">1</text>
+  <text class="t" x="294" y="195" font-size="15" font-weight="bold" fill="#1e40af">读快照</text>
+  <text class="t" x="394" y="195" font-size="12" fill="#475569">BeforeMutation</text>
+  <polygon points="379,214 391,214 385,221" fill="#334155"/>
+
+  <rect x="250" y="220" width="270" height="44" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <circle cx="272" cy="242" r="12" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text class="t prop" x="272" y="247" text-anchor="middle" font-size="12" fill="#166534">2</text>
+  <text class="t" x="294" y="247" font-size="15" font-weight="bold" fill="#166534">动盘</text>
+  <text class="t" x="394" y="247" font-size="12" fill="#475569">Mutation</text>
+  <polygon points="379,266 391,266 385,273" fill="#334155"/>
+
+  <rect x="250" y="272" width="270" height="44" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.5"/>
+  <circle cx="272" cy="294" r="12" fill="#ffffff" stroke="#ca8a04" stroke-width="2"/>
+  <text class="t prop" x="272" y="299" text-anchor="middle" font-size="12" fill="#854d0e">3</text>
+  <text class="t" x="294" y="299" font-size="15" font-weight="bold" fill="#854d0e">量盘</text>
+  <text class="t" x="394" y="299" font-size="12" fill="#475569">Layout</text>
+
+  <!-- 绘制后虚线间隔 -->
+  <line x1="385" y1="319" x2="385" y2="332" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="4,3"/>
+  <text class="t" x="402" y="330" font-size="12" fill="#64748b">浏览器绘制</text>
+  <polygon points="379,332 391,332 385,339" fill="#94a3b8"/>
+
+  <rect x="250" y="338" width="270" height="44" rx="8" fill="#fce7f3" stroke="#db2777" stroke-width="2.5"/>
+  <circle cx="272" cy="360" r="12" fill="#ffffff" stroke="#db2777" stroke-width="2"/>
+  <text class="t prop" x="272" y="365" text-anchor="middle" font-size="12" fill="#9d174d">4</text>
+  <text class="t" x="294" y="365" font-size="15" font-weight="bold" fill="#9d174d">餐后甜点</text>
+  <text class="t" x="394" y="365" font-size="12" fill="#475569">Passive</text>
+
+  <!-- ============ 格 2：换景瞬间 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 换景瞬间</text>
+
+  <!-- 阿R（服务员机器人） -->
+  <g transform="translate(735,342)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 阿R 的气泡 -->
+  <rect x="640" y="168" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="668" y="185" text-anchor="middle">阿R</text>
+  <rect x="640" y="192" width="252" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="700,282 730,282 714,302" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="701" y="276" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="656" y="218">换景这一下最关键：</text>
+  <text class="t dlg" x="656" y="242">mutation 完、layout 前</text>
+  <text class="t dlg" x="656" y="266">指针立刻翻面</text>
+
+  <!-- 说明牌 -->
+  <rect x="912" y="160" width="228" height="80" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="926" y="185" font-size="13.5" fill="#92400e">root.current 在</text>
+  <text class="t prop" x="926" y="207" font-size="13.5" fill="#92400e">mutation 子阶段切换</text>
+  <text class="t prop" x="926" y="229" font-size="13.5" fill="#92400e">layout 读到的已是新树</text>
+
+  <!-- 旧树 -->
+  <rect x="912" y="262" width="92" height="100" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="958" y1="292" x2="936" y2="312" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="958" y1="292" x2="980" y2="312" stroke="#94a3b8" stroke-width="2"/>
+  <circle cx="958" cy="288" r="7" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+  <circle cx="936" cy="316" r="6" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <circle cx="980" cy="316" r="6" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <text class="t prop" x="958" y="348" text-anchor="middle" font-size="13" fill="#64748b">旧树</text>
+
+  <!-- 新树 -->
+  <rect x="1052" y="262" width="92" height="100" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <line x1="1098" y1="292" x2="1078" y2="312" stroke="#0e7490" stroke-width="2"/>
+  <line x1="1098" y1="292" x2="1120" y2="312" stroke="#0e7490" stroke-width="2"/>
+  <circle cx="1098" cy="288" r="7" fill="#61dafb" stroke="#0e7490" stroke-width="2"/>
+  <circle cx="1078" cy="316" r="6" fill="#a5f3fc" stroke="#0e7490" stroke-width="2"/>
+  <circle cx="1120" cy="316" r="6" fill="#a5f3fc" stroke="#0e7490" stroke-width="2"/>
+  <text class="t prop" x="1098" y="348" text-anchor="middle" font-size="13" fill="#1e40af">新树</text>
+
+  <!-- 闸刀道具 -->
+  <path d="M 1008 308 Q 1028 292 1048 308" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <polygon points="1042,302 1053,309 1042,313" fill="#dc2626"/>
+  <text class="t prop" x="1028" y="298" text-anchor="middle" font-size="12" fill="#991b1b">翻面</text>
+  <line x1="1008" y1="350" x2="1048" y2="350" stroke="#64748b" stroke-width="3"/>
+  <circle cx="1008" cy="350" r="4.5" fill="#334155"/>
+  <circle cx="1048" cy="346" r="6" fill="#334155"/>
+  <line x1="1048" y1="346" x2="1014" y2="318" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="1012" cy="316" r="5.5" fill="#61dafb" stroke="#334155" stroke-width="2.5"/>
+
+  <!-- ============ 格 3：先收桌再摆新碗筷 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 先收桌再摆新碗筷</text>
+
+  <!-- 阿R（收拾旧碗筷） -->
+  <g transform="translate(140,544)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+  <!-- 手里的托盘 -->
+  <rect x="196" y="586" width="44" height="10" rx="4" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+
+  <!-- 旧餐桌与旧碗筷 -->
+  <rect x="232" y="566" width="170" height="10" rx="5" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+  <line x1="246" y1="576" x2="246" y2="600" stroke="#64748b" stroke-width="3"/>
+  <line x1="388" y1="576" x2="388" y2="600" stroke="#64748b" stroke-width="3"/>
+  <path d="M 260 560 Q 280 582 300 560 Z" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+  <ellipse cx="280" cy="560" rx="20" ry="5.5" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <line x1="296" y1="534" x2="308" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="302" y1="534" x2="314" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 334 560 Q 354 582 374 560 Z" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+  <ellipse cx="354" cy="560" rx="20" ry="5.5" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <line x1="370" y1="534" x2="382" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="376" y1="534" x2="388" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <text class="t prop" x="317" y="618" text-anchor="middle" font-size="13.5" fill="#475569">第一遍：全桌 destroy</text>
+
+  <!-- 中央说明牌 -->
+  <rect x="470" y="470" width="300" height="58" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="620" y="495" text-anchor="middle" font-size="15" fill="#92400e">所有 effect destroy</text>
+  <text class="t prop" x="620" y="518" text-anchor="middle" font-size="15" fill="#92400e">先于所有 create 执行</text>
+
+  <!-- 先后长箭头 -->
+  <line x1="414" y1="556" x2="780" y2="556" stroke="#334155" stroke-width="3"/>
+  <polygon points="780,548 780,564 796,556" fill="#334155"/>
+  <text class="t" x="620" y="582" text-anchor="middle" font-size="13" fill="#64748b">destroy 全收完，才轮到 create</text>
+
+  <!-- 新餐桌与新碗筷 -->
+  <rect x="800" y="566" width="170" height="10" rx="5" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+  <line x1="814" y1="576" x2="814" y2="600" stroke="#64748b" stroke-width="3"/>
+  <line x1="956" y1="576" x2="956" y2="600" stroke="#64748b" stroke-width="3"/>
+  <path d="M 828 560 Q 848 582 868 560 Z" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+  <ellipse cx="848" cy="560" rx="20" ry="5.5" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <line x1="864" y1="534" x2="876" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="870" y1="534" x2="882" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 902 560 Q 922 582 942 560 Z" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+  <ellipse cx="922" cy="560" rx="20" ry="5.5" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <line x1="938" y1="534" x2="950" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="944" y1="534" x2="956" y2="558" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+  <text class="t prop" x="885" y="618" text-anchor="middle" font-size="13.5" fill="#1e40af">第二遍：统一 create</text>
+
+  <!-- 阿V（等待上新的顾客） -->
+  <g transform="translate(1100,552)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 小气泡 -->
+  <rect x="900" y="430" width="200" height="42" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="1020,470 1050,470 1034,488" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="1021" y="464" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="916" y="457">先收桌，再摆新碗筷！</text>
+
+  <!-- ============ 知识条：码叔划重点 ============ -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• commit 三个同步子阶段加延迟 Passive：读快照 → 改真实 DOM → 执行 layout effect → 绘制后再跑 passive effect</text>
+  <text class="t sb" x="155" y="740">• root.current 在 mutation 阶段切换：保证 layout 阶段读到的一定是新树，卸载时读到旧树</text>
+  <text class="t sb" x="155" y="764">• React 19 用 subtreeFlags 位掩码递归剪枝，不再构建 effect list</text>
+</svg>

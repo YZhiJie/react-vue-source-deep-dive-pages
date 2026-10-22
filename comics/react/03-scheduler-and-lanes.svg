@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.03 · React 第 3 话：Scheduler 与 Lane（急诊分诊台）
+       画布 1200x800；布局：横幅 0-96 / 格1、2 y=124-404 / 格3 y=424-636 / 知识条 656-768
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#61dafb"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · React 篇</text>
+  <text class="t bttl" x="40" y="74">第 3 话 · Scheduler 与 Lane：急诊分诊台</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#61dafb"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.03</text>
+
+  <!-- ============ 格 1：分诊台 ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 分诊台不按先来后到</text>
+
+  <!-- 阿V（急病人，额头加汗滴） -->
+  <g transform="translate(140,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <path d="M 30 -34 Q 35 -24 30 -14 Q 25 -24 30 -34 Z" fill="#7dd3fc" stroke="#334155" stroke-width="2"/>
+  </g>
+  <!-- 阿V 的气泡 -->
+  <rect x="52" y="164" width="56" height="24" rx="12" fill="#42b883"/>
+  <text class="t name" x="80" y="181" text-anchor="middle">阿V</text>
+  <rect x="52" y="192" width="120" height="42" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="120,232 150,232 130,252" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="121" y="226" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="68" y="219">我急！我先！</text>
+
+  <!-- 分诊台柜台 -->
+  <rect x="330" y="336" width="230" height="56" rx="10" fill="#cbd5e1" stroke="#334155" stroke-width="3"/>
+  <rect x="352" y="346" width="110" height="30" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="407" y="366" text-anchor="middle" fill="#92400e">急诊分诊台</text>
+
+  <!-- 阿R（护士版：加护士帽） -->
+  <g transform="translate(445,258)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+    <rect x="-18" y="-72" width="36" height="20" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-3" y="-68" width="6" height="12" fill="#dc2626"/>
+    <rect x="-6" y="-65" width="12" height="6" fill="#dc2626"/>
+  </g>
+  <!-- 阿R 的气泡（名牌放右上避开标题行） -->
+  <rect x="456" y="138" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="484" y="155" text-anchor="middle">阿R</text>
+  <rect x="212" y="166" width="300" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="420,256 448,256 432,276" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="421" y="250" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="224" y="192">挂号按轻重缓急分诊，不</text>
+  <text class="t dlg" x="224" y="216">是先到先看：输入是急诊，</text>
+  <text class="t dlg" x="224" y="240">转场动画是慢诊</text>
+
+  <!-- ============ 格 2：Lane 车道 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#61dafb"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · Lane 车道模型</text>
+
+  <!-- 车道牌（竖排三块） -->
+  <rect x="660" y="190" width="230" height="48" rx="10" fill="#fecaca" stroke="#dc2626" stroke-width="2.5"/>
+  <text class="t sign" x="775" y="220" text-anchor="middle" fill="#991b1b">SyncLane · 急诊通道</text>
+  <rect x="660" y="252" width="230" height="48" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t sign" x="775" y="282" text-anchor="middle" fill="#1e40af">InputLane · 加急通道</text>
+  <rect x="660" y="314" width="230" height="48" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t sign" x="775" y="344" text-anchor="middle" fill="#166534">TransitionLane · 慢诊</text>
+
+  <!-- 车道说明气泡（3 行，底沿在角色头顶之上） -->
+  <rect x="916" y="184" width="220" height="80" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <text class="t dlg" x="932" y="210">位数越小越急，31 位二进制</text>
+  <text class="t dlg" x="932" y="234">按位合并去重</text>
+  <text class="t dlg" x="932" y="258">交并子集全位运算</text>
+  <polygon points="980,264 1008,264 994,282" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="985" y="258" width="28" height="8" fill="#ffffff"/>
+
+  <!-- 路面车道线 -->
+  <rect x="660" y="376" width="230" height="6" rx="3" fill="#94a3b8"/>
+  <circle cx="690" cy="379" r="5" fill="#64748b"/>
+  <circle cx="750" cy="379" r="5" fill="#64748b"/>
+  <circle cx="810" cy="379" r="5" fill="#64748b"/>
+  <circle cx="870" cy="379" r="5" fill="#64748b"/>
+
+  <!-- 阿R（车道管理员，站在牌子下） -->
+  <g transform="translate(1000,336)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+
+  <!-- ============ 格 3：时间切片 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#61dafb"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · 时间切片（5ms）</text>
+
+  <!-- 阿R（举怀表，靠左给时间轴让位） -->
+  <g transform="translate(160,556)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+    <circle cx="46" cy="6" r="13" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.5"/>
+    <line x1="46" y1="6" x2="46" y2="-3" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="46" y1="6" x2="52" y2="9" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="34" y1="20" x2="42" y2="12" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿R 的气泡（整体低于标题线，三角朝左指向角色头部） -->
+  <rect x="210" y="466" width="56" height="24" rx="12" fill="#0e7490"/>
+  <text class="t name" x="238" y="483" text-anchor="middle">阿R</text>
+  <rect x="210" y="494" width="300" height="84" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="212,524 212,550 192,538" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="206" y="526" width="8" height="24" fill="#ffffff"/>
+  <text class="t dlg" x="226" y="520">还有时间吗？切片到点就</text>
+  <text class="t dlg" x="226" y="544">把主线程还给浏览器，输</text>
+  <text class="t dlg" x="226" y="568">入永远插队渲染</text>
+
+  <!-- 闹钟道具 -->
+  <g transform="translate(830,536)">
+    <circle cx="0" cy="0" r="30" fill="#fecaca" stroke="#dc2626" stroke-width="3.5"/>
+    <circle cx="-18" cy="-36" r="9" fill="#fecaca" stroke="#dc2626" stroke-width="3"/>
+    <circle cx="18" cy="-36" r="9" fill="#fecaca" stroke="#dc2626" stroke-width="3"/>
+    <line x1="0" y1="0" x2="0" y2="-16" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="12" y2="6" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-12" y1="26" x2="-18" y2="38" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="12" y1="26" x2="18" y2="38" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+  <rect x="660" y="586" width="340" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="830" y="608" text-anchor="middle" fill="#92400e">MessageChannel 宏任务 · 5ms 一响</text>
+
+  <!-- 时间轴（右移避开角色，终点在闹钟牌左侧） -->
+  <rect x="230" y="586" width="370" height="6" rx="3" fill="#94a3b8"/>
+  <rect x="230" y="586" width="110" height="6" rx="3" fill="#61dafb"/>
+  <circle cx="230" cy="589" r="8" fill="#0e7490"/>
+  <circle cx="340" cy="589" r="8" fill="#0e7490"/>
+  <circle cx="460" cy="589" r="8" fill="#0e7490"/>
+  <circle cx="600" cy="589" r="8" fill="#64748b"/>
+  <text class="t prop" x="230" y="614" text-anchor="start" fill="#475569">0ms</text>
+  <text class="t prop" x="340" y="614" text-anchor="middle" fill="#475569">5ms 让出</text>
+  <text class="t prop" x="460" y="614" text-anchor="middle" fill="#475569">下一轮继续</text>
+
+  <!-- ============ 知识条：码叔划重点 ============ -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• Scheduler 用最小堆管理任务：到期先跑，同优先级先来先做</text>
+  <text class="t sb" x="155" y="740">• Lane 是 31 位二进制优先级模型：位越小越急，支持按位合并与批量剔除</text>
+  <text class="t sb" x="155" y="764">• 时间切片借 MessageChannel 宏任务让出主线程，点击输入永远比渲染先响应</text>
+</svg>

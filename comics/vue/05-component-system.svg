@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.15 · Vue 第 5 章：组件的一生（从 setup 到 DOM）
+       画布 1200x800；布局与 EP.11 完全一致，主色 Vue 绿
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#42b883"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · Vue 篇</text>
+  <text class="t bttl" x="40" y="74">第 15 话 · 组件的一生：从 setup 到 DOM</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#42b883"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.15</text>
+
+  <!-- ============ 格 1：组件的一生（时间线五站） ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 组件的一生</text>
+
+  <!-- 阿V 气泡 -->
+  <rect x="52" y="164" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="80" y="181" text-anchor="middle">阿V</text>
+  <rect x="52" y="192" width="260" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="112,282 140,282 124,302" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="113" y="276" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="68" y="218">牌上五站就是我的一生</text>
+  <text class="t dlg" x="68" y="242">从组件 VNode 出生</text>
+  <text class="t dlg" x="68" y="266">一路走到 patch 上桌</text>
+
+  <!-- 阿V 沿时间线走（角色整段复用，仅改 transform） -->
+  <g transform="translate(96,342)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-20" y="-62" width="40" height="16" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-14" y="-74" width="28" height="14" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  </g>
+
+  <!-- 时间线轨道 -->
+  <line x1="150" y1="355" x2="564" y2="355" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6 6"/>
+  <!-- 五站站牌 -->
+  <rect x="164" y="326" width="68" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="198" y="350" text-anchor="middle" fill="#1e40af">组件</text>
+  <text class="t prop" x="198" y="372" text-anchor="middle" font-size="12" fill="#1e40af">VNode</text>
+  <rect x="248" y="326" width="68" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t prop" x="282" y="350" text-anchor="middle" font-size="12" fill="#92400e">new</text>
+  <text class="t prop" x="282" y="372" text-anchor="middle" fill="#92400e">实例</text>
+  <rect x="332" y="326" width="68" height="58" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t prop" x="366" y="361" text-anchor="middle" fill="#166534">setup()</text>
+  <rect x="416" y="326" width="68" height="58" rx="8" fill="#fce7f3" stroke="#db2777" stroke-width="2.5"/>
+  <text class="t prop" x="450" y="350" text-anchor="middle" font-size="12" fill="#9d174d">render</text>
+  <text class="t prop" x="450" y="372" text-anchor="middle" fill="#9d174d">函数</text>
+  <rect x="500" y="326" width="68" height="58" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+  <text class="t prop" x="534" y="350" text-anchor="middle" font-size="12" fill="#5b21b6">patch</text>
+  <text class="t prop" x="534" y="372" text-anchor="middle" fill="#5b21b6">上桌</text>
+  <polygon points="232,347 232,363 248,355" fill="#334155"/>
+  <polygon points="316,347 316,363 332,355" fill="#334155"/>
+  <polygon points="400,347 400,363 416,355" fill="#334155"/>
+  <polygon points="484,347 484,363 500,355" fill="#334155"/>
+
+  <!-- ============ 格 2：渲染副作用（ReactiveEffect 罩子） ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 渲染副作用</text>
+
+  <!-- 阿V 气泡 -->
+  <rect x="636" y="168" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="664" y="185" text-anchor="middle">阿V</text>
+  <rect x="636" y="186" width="252" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="716,276 744,276 728,296" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="717" y="270" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="652" y="212">这罩子叫渲染副作用</text>
+  <text class="t dlg" x="652" y="236">render 和 patch 全包</text>
+  <text class="t dlg" x="652" y="260">数据一变亮灯重跑</text>
+
+  <!-- 数据一变提示牌 + 闪电箭头 -->
+  <rect x="906" y="190" width="116" height="38" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text class="t sign" x="964" y="214" text-anchor="middle" fill="#92400e">数据一变</text>
+  <line x1="924" y1="224" x2="888" y2="250" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="884,253 896,246 892,259" fill="#d97706"/>
+
+  <!-- 结论牌：组件更新 = effect 重跑 -->
+  <rect x="900" y="238" width="164" height="40" rx="8" fill="#0f172a"/>
+  <text class="t" x="982" y="263" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">组件更新 = effect 重跑</text>
+
+  <!-- ReactiveEffect 罩子 -->
+  <path d="M 700 388 L 700 316 Q 700 268 870 268 Q 1040 268 1040 316 L 1040 388"
+        fill="#42b883" fill-opacity="0.08" stroke="#0f766e" stroke-width="4" stroke-linejoin="round"/>
+  <text class="t" x="870" y="300" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">ReactiveEffect</text>
+  <!-- 罩顶灯 -->
+  <line x1="870" y1="244" x2="870" y2="234" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="850" y1="250" x2="843" y2="243" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="890" y1="250" x2="897" y2="243" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="870" cy="262" r="11" fill="#fbbf24" stroke="#b45309" stroke-width="2.5"/>
+  <!-- 罩内两件事：render + patch 子树 -->
+  <rect x="730" y="326" width="130" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="795" y="357" text-anchor="middle" fill="#1e40af">render 函数</text>
+  <rect x="890" y="326" width="130" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text class="t prop" x="955" y="357" text-anchor="middle" fill="#166534">patch 子树</text>
+  <polygon points="862,343 862,363 884,353" fill="#334155"/>
+
+  <!-- 阿R 串门（角色整段复用，仅改 transform） -->
+  <g transform="translate(1102,336)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+
+  <!-- ============ 格 3：msg 找谁要（三扇门） ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · msg 找谁要</text>
+
+  <!-- 阿V 气泡 -->
+  <rect x="228" y="456" width="216" height="62" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="234,516 262,516 220,538" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="235" y="510" width="30" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="244" y="482">先敲 setupState</text>
+  <text class="t dlg" x="244" y="506">再 props 最后 data</text>
+
+  <!-- 模板举牌：{{ msg }} -->
+  <rect x="80" y="466" width="140" height="44" rx="8" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <line x1="150" y1="510" x2="150" y2="524" stroke="#334155" stroke-width="3"/>
+  <text class="t" x="150" y="495" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f172a">{{ msg }}</text>
+
+  <!-- 阿V（角色整段复用，仅改 transform） -->
+  <g transform="translate(150,576)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <polygon points="-9,-48 0,-64 9,-48" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="24" y="-8" width="70" height="10" rx="5" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <circle cx="40" cy="-20" r="9" fill="#fca5a5" stroke="#334155" stroke-width="2"/>
+    <circle cx="62" cy="-20" r="9" fill="#fcd34d" stroke="#334155" stroke-width="2"/>
+    <circle cx="84" cy="-20" r="9" fill="#86efac" stroke="#334155" stroke-width="2"/>
+  </g>
+
+  <!-- 三扇门：setupState → props → data -->
+  <rect x="470" y="500" width="140" height="126" rx="10" fill="#ecfdf5" stroke="#0f766e" stroke-width="2.5"/>
+  <circle cx="540" cy="542" r="18" fill="#42b883"/>
+  <text class="t chip" x="540" y="547" text-anchor="middle">1</text>
+  <text class="t prop" x="540" y="602" text-anchor="middle" fill="#065f46">setupState</text>
+  <circle cx="596" cy="610" r="4" fill="#0f766e"/>
+
+  <rect x="626" y="500" width="140" height="126" rx="10" fill="#ecfdf5" stroke="#0f766e" stroke-width="2.5"/>
+  <circle cx="696" cy="542" r="18" fill="#42b883"/>
+  <text class="t chip" x="696" y="547" text-anchor="middle">2</text>
+  <text class="t prop" x="696" y="602" text-anchor="middle" fill="#065f46">props</text>
+  <circle cx="752" cy="610" r="4" fill="#0f766e"/>
+
+  <rect x="782" y="500" width="140" height="126" rx="10" fill="#ecfdf5" stroke="#0f766e" stroke-width="2.5"/>
+  <circle cx="852" cy="542" r="18" fill="#42b883"/>
+  <text class="t chip" x="852" y="547" text-anchor="middle">3</text>
+  <text class="t prop" x="852" y="602" text-anchor="middle" fill="#065f46">data</text>
+  <circle cx="908" cy="610" r="4" fill="#0f766e"/>
+
+  <polygon points="614,553 614,577 634,565" fill="#334155"/>
+  <polygon points="770,553 770,577 790,565" fill="#334155"/>
+
+  <!-- accessCache 加速小牌 -->
+  <line x1="924" y1="538" x2="938" y2="538" stroke="#fbbf24" stroke-width="3"/>
+  <polygon points="938,530 938,546 952,538" fill="#fbbf24"/>
+  <rect x="954" y="515" width="152" height="46" rx="10" fill="#0f172a"/>
+  <text class="t" x="1030" y="544" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">accessCache 加速</text>
+
+  <!-- 知识条：码叔划重点 -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">① 挂载组件 VNode 时创建 ComponentInternalInstance，并执行 setup() 拿到响应式状态</text>
+  <text class="t sb" x="155" y="740">② setupRenderEffect 建渲染副作用，依赖一变 effect 重跑，就是组件重渲染</text>
+  <text class="t sb" x="155" y="764">③ 模板变量经 PublicInstanceProxyHandlers 按 setupState/props/data 顺序查找并缓存</text>
+</svg>

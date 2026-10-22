@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#61dafb"/>
+      <stop offset="0.5" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#42b883"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="24" fill="url(#g)"/>
+  <text x="60" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="42" font-weight="bold" fill="#fff">R×V</text>
+  <text x="60" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="rgba(255,255,255,.9)">SOURCE</text>
+</svg>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+  comics/index.html · 源码漫画剧场一键阅读器（零依赖单文件）
+  ────────────────────────────────────────────────────────
+  设计决策与坑点：
+  1. 双视图：默认「目录卡片」（React 篇 / Vue 篇 / 终章对决三分区，缩略图懒加载）；
+     点击卡片进入「单话阅读」——SVG 原画 + 同页 fetch 讲解 MD 渲染为 HTML，
+     支持按钮与键盘（← 上一话 / → 下一话 / Esc 返回目录）。
+  2. 内容来源：优先 fetch manifest.json（唯一登记处），file:// 双击时 fetch 受 CORS
+     限制会失败，静默回退到内嵌 FALLBACK 清单（与 manifest.json 同步维护）。
+  3. 坑·相对链接：讲解 MD 里的链接（如 ../../docs/...、./x.svg）是相对于 MD 文件
+     所在目录写的，渲染后必须按 MD 的 URL 重新解析（new URL(href, mdUrl)），
+     否则从 comics/index.html 直接拼接会指向错误路径。
+  4. 坑·file://：双击打开时 MD fetch 必然失败（浏览器安全策略），原画 <img> 仍可看；
+     此时显示提示条，引导用 python3 -m http.server 起本地服务。
+  5. 错误处理：原画 onerror 替换为错误卡片（话数 + 重试按钮），重试加时间戳绕缓存；
+     阅读进度写 localStorage，下次打开出现「继续阅读」；URL #EP.XX 锚点直达。
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>源码漫画剧场 · React 19 × Vue 3.5 — 18 话一键阅读</title>
+  <style>
+    :root {
+      --bg: #0c1018;
+      --panel: #141b26;
+      --line: #26303f;
+      --react: #61dafb;
+      --vue: #42b883;
+      --amber: #f59e0b;
+      --red: #f87171;
+      --text: #e6edf3;
+      --muted: #8b98a8;
+      --toolbar-h: 56px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    /* ===================== 目录视图 ===================== */
+    #gallery {
+      padding: 48px 24px 80px;
+    }
+
+    header.hero {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    header.hero h1 {
+      font-size: 36px;
+      background: linear-gradient(90deg, var(--react), var(--vue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+
+    header.hero p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .btn-resume {
+      margin-top: 18px;
+      border: 2px solid var(--amber);
+      background: transparent;
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .btn-resume:hover {
+      background: var(--amber);
+      color: #1a1305;
+    }
+
+    .arc-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 1120px;
+      margin: 44px auto 20px;
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .arc-label::before,
+    .arc-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .arc-label.react {
+      color: var(--react);
+    }
+
+    .arc-label.vue {
+      color: var(--vue);
+    }
+
+    .arc-label.vs {
+      color: var(--amber);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 20px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card.react:hover {
+      border-color: var(--react);
+    }
+
+    .card.vue:hover {
+      border-color: var(--vue);
+    }
+
+    .card.vs:hover {
+      border-color: var(--amber);
+    }
+
+    .card img.thumb {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      display: block;
+      object-fit: cover;
+      background: #0a0e15;
+    }
+
+    .card .meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+    }
+
+    .card .ep-badge {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .card.react .ep-badge {
+      color: #06141a;
+      background: var(--react);
+    }
+
+    .card.vue .ep-badge {
+      color: #06150e;
+      background: var(--vue);
+    }
+
+    .card.vs .ep-badge {
+      color: #1a1305;
+      background: var(--amber);
+    }
+
+    .card .t-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* ===================== 阅读视图 ===================== */
+    #reader {
+      display: none;
+    }
+
+    body.reading #gallery {
+      display: none;
+    }
+
+    body.reading #reader {
+      display: block;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: var(--toolbar-h);
+      padding: 0 18px;
+      background: rgba(12, 16, 24, .92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .toolbar .t-brand {
+      font-size: 14px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--react), var(--vue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      white-space: nowrap;
+      margin-right: auto;
+    }
+
+    .btn {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color .18s ease, color .18s ease, transform .12s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--react);
+      color: var(--react);
+    }
+
+    .btn:active {
+      transform: scale(.96);
+    }
+
+    .btn:disabled {
+      opacity: .35;
+      cursor: default;
+      transform: none;
+    }
+
+    .btn:disabled:hover {
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .toolbar .counter {
+      font-size: 12.5px;
+      color: var(--muted);
+      min-width: 58px;
+      text-align: center;
+    }
+
+    .ep-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 20px 72px;
+    }
+
+    .ep-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .ep-head .ep-badge {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      padding: 4px 13px;
+      border-radius: 999px;
+    }
+
+    .ep-head.react .ep-badge {
+      color: #06141a;
+      background: var(--react);
+    }
+
+    .ep-head.vue .ep-badge {
+      color: #06150e;
+      background: var(--vue);
+    }
+
+    .ep-head.vs .ep-badge {
+      color: #1a1305;
+      background: var(--amber);
+    }
+
+    .ep-head h2 {
+      font-size: 21px;
+    }
+
+    .frame {
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0a0e15;
+    }
+
+    .frame img {
+      width: 100%;
+      display: block;
+    }
+
+    .err-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 52px 20px;
+      border: 2px dashed var(--red);
+      background: rgba(248, 113, 113, .06);
+      text-align: center;
+    }
+
+    .err-card .err-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--red);
+    }
+
+    .err-card .err-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .err-card .btn {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .err-card .btn:hover {
+      background: var(--red);
+      color: #160a0a;
+    }
+
+    .md-notice {
+      margin-top: 18px;
+      padding: 12px 18px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      border-radius: 10px;
+      background: rgba(245, 158, 11, .07);
+    }
+
+    /* ---- 讲解正文排版 ---- */
+    .article {
+      margin-top: 30px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .article h1 {
+      font-size: 22px;
+      margin: 8px 0 16px;
+    }
+
+    .article h2 {
+      font-size: 18px;
+      margin: 30px 0 12px;
+      padding-left: 10px;
+      border-left: 4px solid var(--react);
+    }
+
+    body.part-vue .article h2 {
+      border-left-color: var(--vue);
+    }
+
+    body.part-vs .article h2 {
+      border-left-color: var(--amber);
+    }
+
+    .article h3 {
+      font-size: 16px;
+      margin: 22px 0 8px;
+      color: var(--text);
+    }
+
+    .article p {
+      margin: 10px 0;
+      color: #cdd7e3;
+    }
+
+    .article ul,
+    .article ol {
+      margin: 10px 0 10px 4px;
+      padding-left: 24px;
+    }
+
+    .article li {
+      margin: 6px 0;
+      color: #cdd7e3;
+    }
+
+    .article blockquote {
+      margin: 14px 0;
+      padding: 10px 16px;
+      color: var(--muted);
+      border-left: 4px solid var(--amber);
+      background: rgba(245, 158, 11, .06);
+      border-radius: 0 10px 10px 0;
+    }
+
+    .article code {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 13px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #1d2634;
+      color: var(--react);
+    }
+
+    .article a {
+      color: var(--react);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--react);
+    }
+
+    .article a:hover {
+      border-bottom-style: solid;
+    }
+
+    .article strong {
+      color: var(--text);
+    }
+
+    /* ---- 底部翻页 ---- */
+    .pager {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 44px;
+    }
+
+    footer.gallery-foot {
+      text-align: center;
+      margin-top: 64px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    footer.gallery-foot code {
+      font-family: "SF Mono", Menlo, monospace;
+      color: var(--react);
+      background: #1d2634;
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+
+    /* ===================== 响应式 ===================== */
+    @media (max-width: 639px) {
+      #gallery {
+        padding: 32px 14px 60px;
+      }
+
+      header.hero h1 {
+        font-size: 27px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        padding: 0 10px;
+        gap: 6px;
+      }
+
+      .toolbar .t-brand {
+        display: none;
+      }
+
+      .toolbar .btn-back-label {
+        display: none;
+      }
+
+      .ep-wrap {
+        padding: 20px 14px 56px;
+      }
+
+      .ep-head h2 {
+        font-size: 18px;
+      }
+
+      .pager {
+        flex-wrap: wrap;
+      }
+
+      .pager .btn {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===================== 目录视图 ===================== -->
+  <div id="gallery">
+    <header class="hero">
+      <h1>源码漫画剧场</h1>
+      <p>React 19.3.0 × Vue 3.5.43 · 全 18 话 · 阿R × 阿V × 码叔</p>
+      <button class="btn-resume" id="btn-resume" hidden></button>
+    </header>
+    <div id="sections"></div>
+    <footer class="gallery-foot">
+      点击卡片即可进入「原画 + 讲解全文」阅读，支持 ← → 键翻页、Esc 返回目录<br>
+      双击打开本文件时讲解需通过本地服务查看：在项目根目录执行
+      <code>python3 -m http.server 8000</code> 后访问 <code>/comics/</code>
+    </footer>
+  </div>
+
+  <!-- ===================== 阅读视图 ===================== -->
+  <div id="reader">
+    <div class="toolbar">
+      <button class="btn" id="btn-back" title="返回目录 (Esc)">←<span class="btn-back-label">&nbsp;目录</span></button>
+      <span class="t-brand">源码漫画剧场</span>
+      <button class="btn" id="btn-prev">← 上一话</button>
+      <span class="counter" id="counter">1 / 18</span>
+      <button class="btn" id="btn-next">下一话 →</button>
+    </div>
+
+    <div class="ep-wrap">
+      <div class="ep-head" id="ep-head">
+        <span class="ep-badge" id="r-ep-badge">EP.01</span>
+        <h2 id="r-title"></h2>
+      </div>
+
+      <div class="frame" id="r-frame">
+        <img id="r-img" alt="">
+      </div>
+
+      <div class="md-notice" id="md-notice" hidden></div>
+      <div class="article" id="r-md"></div>
+
+      <div class="pager">
+        <button class="btn" id="btn-prev2">← 上一话</button>
+        <button class="btn" id="btn-back2">返回目录</button>
+        <button class="btn" id="btn-next2">下一话 →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============ 内嵌兜底清单：与 manifest.json 同步维护 ============ */
+    const FALLBACK_EPISODES = [
+      { ep: "EP.01", part: "react", title: "架构总览：餐厅后厨流水线", comic: "react/01-architecture-overview" },
+      { ep: "EP.02", part: "react", title: "Element 与 Fiber：剧本与演出档案", comic: "react/02-element-and-fiber" },
+      { ep: "EP.03", part: "react", title: "Scheduler 与 Lane：急诊分诊台", comic: "react/03-scheduler-and-lanes" },
+      { ep: "EP.04", part: "react", title: "render 阶段：可中断的深度优先遍历", comic: "react/04-render-phase" },
+      { ep: "EP.05", part: "react", title: "协调与 Diff：key 事故现场", comic: "react/05-reconciliation-diff" },
+      { ep: "EP.06", part: "react", title: "状态更新链路：setN 的奇幻漂流", comic: "react/06-state-update-chain" },
+      { ep: "EP.07", part: "react", title: "Hooks：只认顺序的钩子链", comic: "react/07-hooks" },
+      { ep: "EP.08", part: "react", title: "commit：不可打断的上菜时刻", comic: "react/08-commit-and-lifecycle" },
+      { ep: "EP.09", part: "react", title: "渲染器与事件：三层楼与总接待台", comic: "react/09-renderer-and-events" },
+      { ep: "EP.10", part: "react", title: "并发与 Suspense：能放下的半成品", comic: "react/10-concurrent-and-suspense" },
+      { ep: "EP.11", part: "vue", title: "架构总览：中央厨房与传菜铃", comic: "vue/01-architecture" },
+      { ep: "EP.12", part: "vue", title: "响应式：Link 链表心脏", comic: "vue/02-reactivity" },
+      { ep: "EP.13", part: "vue", title: "VNode 与渲染器：拼一桌模型", comic: "vue/03-vnode-and-renderer" },
+      { ep: "EP.14", part: "vue", title: "Diff：为什么必须写 key", comic: "vue/04-diff-algorithm" },
+      { ep: "EP.15", part: "vue", title: "组件的一生：从 setup 到 DOM", comic: "vue/05-component-system" },
+      { ep: "EP.16", part: "vue", title: "Composition 与内置组件百宝箱", comic: "vue/06-composition-api" },
+      { ep: "EP.17", part: "vue", title: "编译器：给半成品贴标签", comic: "vue/07-compiler" },
+      { ep: "EP.18", part: "comparison", title: "React vs Vue：两位厨师的做菜哲学", comic: "comparison/react-vs-vue" }
+    ];
+
+    const PART_LABELS = {
+      react: "React 篇 · EP.01 – 10",
+      vue: "Vue 篇 · EP.11 – 17",
+      comparison: "终章对决 · EP.18"
+    };
+
+    const LS_KEY = "rv-comics-progress";
+    const epNum = (ep) => parseInt(ep.slice(3), 10);
+
+    let episodes = [];
+    let current = -1;
+
+    /* ============ 1. 载入话数：manifest 优先，失败回退内嵌 ============ */
+    async function loadEpisodes() {
+      try {
+        const res = await fetch("./manifest.json");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (!Array.isArray(data.episodes) || data.episodes.length === 0) throw new Error("episodes 为空");
+        return data.episodes.map(({ ep, part, title, comic }) => ({ ep, part, title, comic }));
+      } catch (_) {
+        return FALLBACK_EPISODES;
+      }
+    }
+
+    /* ============ 2. 目录渲染（按 part 分区） ============ */
+    function renderGallery() {
+      const wrap = document.getElementById("sections");
+      wrap.innerHTML = "";
+      for (const part of ["react", "vue", "comparison"]) {
+        const list = episodes.filter((e) => e.part === part);
+        if (!list.length) continue;
+        const label = document.createElement("div");
+        label.className = `arc-label ${part === "comparison" ? "vs" : part}`;
+        label.textContent = PART_LABELS[part];
+        wrap.appendChild(label);
+
+        const grid = document.createElement("div");
+        grid.className = "grid";
+        for (const e of list) {
+          const card = document.createElement("div");
+          card.className = `card ${part === "comparison" ? "vs" : part}`;
+          card.innerHTML = `
+            <img class="thumb" src="${e.comic}.svg" alt="${e.ep} ${e.title}" loading="lazy" decoding="async">
+            <div class="meta">
+              <span class="ep-badge">${e.ep}</span>
+              <span class="t-title">${e.title}</span>
+            </div>`;
+          card.querySelector("img").addEventListener("error", function () {
+            this.style.opacity = ".35";
+          });
+          card.addEventListener("click", () => openEpisode(e.ep));
+          grid.appendChild(card);
+        }
+        wrap.appendChild(grid);
+      }
+    }
+
+    /* ============ 3. 极简 Markdown 渲染（仅覆盖讲解 MD 实际用到的语法） ============ */
+    function escapeHtml(s) {
+      return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // 行内：行内代码先抽离 → 转义 → 粗体 → 链接 → 回填代码
+    function renderInline(line) {
+      const codes = [];
+      let s = line.replace(/`([^`]+)`/g, (_, c) => {
+        codes.push(c);
+        return "\u0000" + (codes.length - 1) + "\u0000";
+      });
+      s = escapeHtml(s);
+      s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, text, href) =>
+        `<a href="${href}" data-mdlink="1">${text}</a>`);
+      s = s.replace(/\u0000(\d+)\u0000/g, (_, i) => `<code>${escapeHtml(codes[i])}</code>`);
+      return s;
+    }
+
+    function renderMarkdown(md) {
+      const lines = md.replace(/\r\n?/g, "\n").split("\n");
+      let html = "";
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (/^#{1,6}\s/.test(line)) {
+          const level = line.match(/^#+/)[0].length;
+          html += `<h${level}>${renderInline(line.slice(level + 1).trim())}</h${level}>`;
+        } else if (/^>\s?/.test(line)) {
+          const buf = [];
+          while (i < lines.length && /^>\s?/.test(lines[i])) {
+            buf.push(lines[i].replace(/^>\s?/, ""));
+            i++;
+          }
+          i--;
+          html += `<blockquote>${buf.map(renderInline).join("<br>")}</blockquote>`;
+        } else if (/^\s*[-*]\s+/.test(line)) {
+          const buf = [];
+          while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+            buf.push(lines[i].replace(/^\s*[-*]\s+/, ""));
+            i++;
+          }
+          i--;
+          html += "<ul>" + buf.map((x) => `<li>${renderInline(x)}</li>`).join("") + "</ul>";
+        } else if (/^\s*\d+\.\s+/.test(line)) {
+          const buf = [];
+          while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+            buf.push(lines[i].replace(/^\s*\d+\.\s+/, ""));
+            i++;
+          }
+          i--;
+          html += "<ol>" + buf.map((x) => `<li>${renderInline(x)}</li>`).join("") + "</ol>";
+        } else if (line.trim() !== "") {
+          html += `<p>${renderInline(line)}</p>`;
+        }
+      }
+      return html;
+    }
+
+    // 相对链接修正：以 MD 文件自身 URL 为基址解析（坑点见文件头第 3 条）
+    function fixLinks(container, e) {
+      const mdUrl = new URL(`${e.comic}.md`, location.href);
+      container.querySelectorAll("a[data-mdlink]").forEach((a) => {
+        a.href = new URL(a.getAttribute("href"), mdUrl).href;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.removeAttribute("data-mdlink");
+      });
+    }
+
+    /* ============ 4. 阅读视图 ============ */
+    const img = document.getElementById("r-img");
+    const notice = document.getElementById("md-notice");
+    const mdEl = document.getElementById("r-md");
+    const btnPrev = document.getElementById("btn-prev");
+    const btnNext = document.getElementById("btn-next");
+    const btnPrev2 = document.getElementById("btn-prev2");
+    const btnNext2 = document.getElementById("btn-next2");
+    const counter = document.getElementById("counter");
+
+    // retry=true 时加时间戳绕缓存
+    function mountImgAt(e, retry) {
+      const frame = document.getElementById("r-frame");
+      frame.innerHTML = "";
+      const im = document.createElement("img");
+      im.alt = `${e.ep} ${e.title}`;
+      im.addEventListener("error", () => {
+        const err = document.createElement("div");
+        err.className = "err-card";
+        err.innerHTML = `
+          <div class="err-title">${e.ep} 《${e.title}》原画加载失败</div>
+          <div class="err-desc">路径：${e.comic}.svg ｜ 请检查文件是否存在</div>
+          <button class="btn">重试加载</button>`;
+        err.querySelector("button").addEventListener("click", () => mountImgAt(e, true));
+        frame.innerHTML = "";
+        frame.appendChild(err);
+      }, { once: true });
+      im.src = retry ? `${e.comic}.svg?retry=${Date.now()}` : `${e.comic}.svg`;
+      frame.appendChild(im);
+    }
+
+    async function loadExplanation(e) {
+      notice.hidden = true;
+      mdEl.innerHTML = "";
+      try {
+        const res = await fetch(`${e.comic}.md`);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const text = await res.text();
+        mdEl.innerHTML = renderMarkdown(text);
+        fixLinks(mdEl, e);
+      } catch (_) {
+        notice.innerHTML = `讲解全文加载失败：双击打开（file://）时浏览器禁止读取 MD 文件。<br>
+          请在项目根目录执行 <code>python3 -m http.server 8000</code>，再访问
+          <code>http://localhost:8000/comics/</code>`;
+        notice.hidden = false;
+      }
+    }
+
+    function openEpisode(ep) {
+      const idx = episodes.findIndex((e) => e.ep === ep);
+      if (idx < 0) return;
+      current = idx;
+      const e = episodes[idx];
+
+      document.body.classList.add("reading");
+      document.body.classList.toggle("part-vue", e.part === "vue");
+      document.body.classList.toggle("part-vs", e.part === "comparison");
+
+      const head = document.getElementById("ep-head");
+      head.className = `ep-head ${e.part === "comparison" ? "vs" : e.part}`;
+      document.getElementById("r-ep-badge").textContent = e.ep;
+      document.getElementById("r-title").textContent = e.title;
+
+      counter.textContent = `${idx + 1} / ${episodes.length}`;
+      const hasPrev = idx > 0;
+      const hasNext = idx < episodes.length - 1;
+      btnPrev.disabled = btnPrev2.disabled = !hasPrev;
+      btnNext.disabled = btnNext2.disabled = !hasNext;
+
+      mountImgAt(e, false);
+      loadExplanation(e);
+      window.scrollTo(0, 0);
+
+      if (location.hash.slice(1) !== e.ep) {
+        history.pushState({ ep: e.ep }, "", "#" + e.ep);
+      }
+      try { localStorage.setItem(LS_KEY, e.ep); } catch (_) { /* 隐私模式静默 */ }
+    }
+
+    function go(delta) {
+      const next = current + delta;
+      if (next >= 0 && next < episodes.length) openEpisode(episodes[next].ep);
+    }
+
+    function backToGallery() {
+      document.body.classList.remove("reading", "part-vue", "part-vs");
+      current = -1;
+      history.pushState("", "", location.pathname + location.search);
+      window.scrollTo(0, 0);
+    }
+
+    btnPrev.addEventListener("click", () => go(-1));
+    btnPrev2.addEventListener("click", () => go(-1));
+    btnNext.addEventListener("click", () => go(1));
+    btnNext2.addEventListener("click", () => go(1));
+    document.getElementById("btn-back").addEventListener("click", backToGallery);
+    document.getElementById("btn-back2").addEventListener("click", backToGallery);
+
+    // 键盘翻页：输入框聚焦时不拦截
+    document.addEventListener("keydown", (ev) => {
+      if (!document.body.classList.contains("reading")) return;
+      if (ev.target.matches("input, textarea")) return;
+      if (ev.key === "ArrowLeft") go(-1);
+      else if (ev.key === "ArrowRight") go(1);
+      else if (ev.key === "Escape") backToGallery();
+    });
+
+    // 浏览器前进/后退
+    window.addEventListener("popstate", () => {
+      const hash = location.hash.slice(1);
+      if (hash && episodes.some((e) => e.ep === hash)) openEpisode(hash);
+      else backToGallery();
+    });
+
+    /* ============ 5. 继续阅读 ============ */
+    function initResume() {
+      let saved = null;
+      try { saved = localStorage.getItem(LS_KEY); } catch (_) { }
+      const btn = document.getElementById("btn-resume");
+      if (saved && episodes.some((e) => e.ep === saved)) {
+        btn.textContent = `继续阅读 ${saved}`;
+        btn.hidden = false;
+        btn.addEventListener("click", () => openEpisode(saved));
+      }
+    }
+
+    /* ============ 启动 ============ */
+    (async function init() {
+      episodes = (await loadEpisodes()).sort((a, b) => epNum(a.ep) - epNum(b.ep));
+      renderGallery();
+      initResume();
+      // URL 锚点直达
+      const hash = decodeURIComponent(location.hash.slice(1));
+      if (hash && episodes.some((e) => e.ep === hash)) openEpisode(hash);
+    })();
+  </script>
+</body>
+
+</html>

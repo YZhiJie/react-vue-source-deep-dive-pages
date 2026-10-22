@@ -1,0 +1,284 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- ============================================================
+       源码漫画剧场 EP.12 · Vue 第 2 话：响应式 Link 链表心脏
+       画布 1200x800；版式与第 1 话完全一致，主色 Vue 绿
+       ============================================================ -->
+  <defs>
+    <style>
+      .t    { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+      .dlg  { font-size: 16px; fill: #0f172a; }
+      .name { font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .plab { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .bsub { font-size: 18px; fill: #94a3b8; }
+      .bttl { font-size: 30px; font-weight: bold; fill: #ffffff; }
+      .bdg  { font-size: 22px; font-weight: bold; fill: #0f172a; }
+      .chip { font-size: 15px; font-weight: bold; fill: #ffffff; }
+      .sign { font-size: 15px; font-weight: bold; }
+      .sh   { font-size: 18px; font-weight: bold; fill: #fbbf24; }
+      .sb   { font-size: 15.5px; fill: #e2e8f0; }
+      .prop { font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f1f5f9"/>
+
+  <!-- 顶部横幅 -->
+  <rect x="0" y="0" width="1200" height="96" fill="#0f172a"/>
+  <rect x="0" y="0" width="14" height="96" fill="#42b883"/>
+  <text class="t bsub" x="40" y="36">源码漫画剧场 · Vue 篇</text>
+  <text class="t bttl" x="40" y="74">第 12 话 · 响应式：Link 链表心脏</text>
+  <rect x="1050" y="26" width="110" height="44" rx="22" fill="#42b883"/>
+  <text class="t bdg" x="1105" y="55" text-anchor="middle">EP.12</text>
+
+  <!-- ============ 格 1：门铃连线（Dep 与 Link） ============ -->
+  <rect x="40" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="155" text-anchor="middle">1</text>
+  <text class="t plab" x="88" y="156">场景一 · 门铃连线（Dep 门铃总控）</text>
+
+  <!-- 阿V（整组复制自第 1 话，只改 transform） -->
+  <g transform="translate(104,344)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-20" y="-62" width="40" height="16" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-14" y="-74" width="28" height="14" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  </g>
+
+  <!-- 数据房间（Dep） -->
+  <polygon points="222,322 290,290 358,322" fill="#42b883" stroke="#334155" stroke-width="2.5"/>
+  <rect x="232" y="320" width="116" height="76" fill="#ecfdf5" stroke="#0f766e" stroke-width="2.5"/>
+  <rect x="244" y="330" width="92" height="18" rx="4" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+  <text class="t prop" x="290" y="343" text-anchor="middle" font-size="12" fill="#0f766e">Dep 门铃总控</text>
+  <text class="t prop" x="290" y="361" text-anchor="middle" font-size="11" fill="#065f46">数据房间</text>
+  <rect x="278" y="368" width="24" height="28" rx="4" fill="#a7f3d0" stroke="#0f766e" stroke-width="2"/>
+  <circle cx="297" cy="383" r="2" fill="#0f766e"/>
+
+  <!-- effect 小房间 -->
+  <rect x="392" y="310" width="150" height="38" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="467" y="334" text-anchor="middle" font-size="12.5" fill="#1e40af">effect 小房间 E1</text>
+  <rect x="392" y="360" width="150" height="38" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="467" y="384" text-anchor="middle" font-size="12.5" fill="#1e40af">effect 小房间 E2</text>
+
+  <!-- Link 连线 -->
+  <line x1="348" y1="329" x2="392" y2="329" stroke="#42b883" stroke-width="3"/>
+  <rect x="356" y="321" width="24" height="16" rx="4" fill="#fbbf24" stroke="#b45309" stroke-width="1.5"/>
+  <text class="t" x="368" y="333" text-anchor="middle" font-size="9" font-weight="bold" fill="#78350f">L1</text>
+  <line x1="348" y1="379" x2="392" y2="379" stroke="#42b883" stroke-width="3"/>
+  <rect x="356" y="371" width="24" height="16" rx="4" fill="#fbbf24" stroke="#b45309" stroke-width="1.5"/>
+  <text class="t" x="368" y="383" text-anchor="middle" font-size="9" font-weight="bold" fill="#78350f">L2</text>
+  <text class="t" x="368" y="358" text-anchor="middle" font-size="14" font-weight="bold" fill="#94a3b8">…</text>
+
+  <!-- 阿V 气泡 -->
+  <rect x="48" y="164" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="76" y="181" text-anchor="middle">阿V</text>
+  <rect x="48" y="192" width="224" height="96" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="100,286 128,286 112,306" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="101" y="280" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="64" y="218">数据房间与每个 effect</text>
+  <text class="t dlg" x="64" y="242">小房间之间都拉一条</text>
+  <text class="t dlg" x="64" y="266">Link 线，这就是依赖</text>
+
+  <!-- ============ 格 2：读时连线，写时摇铃 ============ -->
+  <rect x="620" y="124" width="540" height="280" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="646" cy="150" r="14" fill="#42b883"/>
+  <text class="t chip" x="646" y="155" text-anchor="middle">2</text>
+  <text class="t plab" x="668" y="156">场景二 · 读时连线，写时摇铃</text>
+
+  <!-- 阿V（整组复制，只改 transform） -->
+  <g transform="translate(740,344)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-20" y="-62" width="40" height="16" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-14" y="-74" width="28" height="14" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  </g>
+
+  <!-- 阿V 气泡 -->
+  <rect x="700" y="166" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="728" y="183" text-anchor="middle">阿V</text>
+  <rect x="700" y="192" width="250" height="60" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="738,252 764,252 750,270" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="739" y="246" width="28" height="8" fill="#ffffff"/>
+  <text class="t dlg" x="716" y="218">读时 track 把线接上</text>
+  <text class="t dlg" x="716" y="242">写时 trigger 摇铃亮灯</text>
+
+  <!-- 时机小签 -->
+  <rect x="806" y="258" width="64" height="20" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text class="t sign" x="838" y="273" text-anchor="middle" font-size="10" fill="#166534">get 读时</text>
+  <rect x="960" y="258" width="64" height="20" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text class="t sign" x="992" y="273" text-anchor="middle" font-size="10" fill="#854d0e">set 写时</text>
+
+  <!-- 数据门与门铃 -->
+  <rect x="812" y="288" width="84" height="104" rx="8" fill="#ecfdf5" stroke="#0ea56d" stroke-width="2.5"/>
+  <rect x="822" y="298" width="64" height="18" rx="4" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+  <text class="t prop" x="854" y="311" text-anchor="middle" font-size="11" fill="#0f766e">dep 数据</text>
+  <circle cx="884" cy="350" r="3" fill="#0f766e"/>
+  <path d="M 848 282 A 8 8 0 0 1 860 282" fill="#fbbf24" stroke="#b45309" stroke-width="2"/>
+  <circle cx="854" cy="280" r="9" fill="#fbbf24" stroke="#b45309" stroke-width="2"/>
+  <line x1="854" y1="271" x2="854" y2="266" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 840 273 A 17 17 0 0 1 840 287" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 868 273 A 17 17 0 0 0 868 287" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <text class="t" x="884" y="272" font-size="12" font-weight="bold" fill="#b45309">叮！</text>
+
+  <!-- 订阅者房间 -->
+  <rect x="960" y="294" width="152" height="40" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="1036" y="319" text-anchor="middle" font-size="12.5" fill="#1e40af">effect 订阅者</text>
+  <rect x="960" y="350" width="152" height="40" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text class="t prop" x="1036" y="375" text-anchor="middle" font-size="12.5" fill="#1e40af">effect 订阅者</text>
+
+  <!-- 上线：get track 刚接好（灰灯未亮） -->
+  <line x1="896" y1="314" x2="960" y2="314" stroke="#42b883" stroke-width="3"/>
+  <rect x="902" y="306" width="44" height="16" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text class="t" x="924" y="318" text-anchor="middle" font-size="9" font-weight="bold" fill="#166534">track</text>
+  <circle cx="958" cy="314" r="4" fill="#cbd5e1"/>
+
+  <!-- 下线：set trigger 摇铃，订阅者亮灯 -->
+  <line x1="896" y1="370" x2="960" y2="370" stroke="#fbbf24" stroke-width="4"/>
+  <rect x="900" y="362" width="46" height="16" rx="4" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text class="t" x="923" y="374" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#854d0e">trigger</text>
+  <circle cx="958" cy="370" r="12" fill="#fef08a" opacity="0.55"/>
+  <circle cx="958" cy="370" r="7" fill="#fde047" stroke="#ca8a04" stroke-width="2"/>
+
+  <!-- ============ 格 3：Proxy 整门代理 ============ -->
+  <rect x="40" y="424" width="1120" height="212" rx="16" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <circle cx="66" cy="450" r="14" fill="#42b883"/>
+  <text class="t chip" x="66" y="455" text-anchor="middle">3</text>
+  <text class="t plab" x="88" y="456">场景三 · Proxy 整门代理</text>
+
+  <!-- 阿R 抱旧门的机械臂（先画线，旧门压在上面） -->
+  <line x1="314" y1="592" x2="332" y2="560" stroke="#334155" stroke-width="9" stroke-linecap="round"/>
+  <line x1="314" y1="592" x2="332" y2="560" stroke="#a5f3fc" stroke-width="5" stroke-linecap="round"/>
+  <line x1="314" y1="606" x2="332" y2="608" stroke="#334155" stroke-width="9" stroke-linecap="round"/>
+  <line x1="314" y1="606" x2="332" y2="608" stroke="#a5f3fc" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- 阿R（整组复制自第 1 话，只改 transform） -->
+  <g transform="translate(286,572)">
+    <ellipse cx="0" cy="60" rx="52" ry="10" fill="#e2e8f0"/>
+    <line x1="0" y1="-56" x2="0" y2="-40" stroke="#334155" stroke-width="4"/>
+    <circle cx="0" cy="-62" r="7" fill="#61dafb" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="36" fill="#61dafb" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-12" cy="-19" r="4.5" fill="#0f172a"/>
+    <circle cx="12" cy="-19" r="4.5" fill="#0f172a"/>
+    <path d="M -11 -5 Q 0 3 11 -5" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="18" width="56" height="42" rx="14" fill="#a5f3fc" stroke="#334155" stroke-width="3.5"/>
+    <text x="0" y="46" text-anchor="middle" font-family="'Arial Black',sans-serif" font-size="18" font-weight="bold" fill="#0e7490">R</text>
+  </g>
+
+  <!-- 旧门：Object.defineProperty -->
+  <g transform="rotate(-6 367 577)">
+    <rect x="326" y="526" width="82" height="102" rx="6" fill="#fef3c7" stroke="#92400e" stroke-width="3"/>
+    <rect x="336" y="536" width="62" height="20" rx="4" fill="#92400e"/>
+    <text class="t name" x="367" y="550" text-anchor="middle" font-size="12">旧门</text>
+    <text class="t" x="367" y="578" text-anchor="middle" font-size="10" font-weight="bold" fill="#78350f">defineProperty</text>
+    <text class="t" x="367" y="599" text-anchor="middle" font-size="11" fill="#7c2d12">新增属性</text>
+    <text class="t" x="367" y="617" text-anchor="middle" font-size="11" fill="#7c2d12">没有门铃</text>
+  </g>
+  <!-- 坏掉的门铃 -->
+  <circle cx="358" cy="512" r="10" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <line x1="358" y1="502" x2="358" y2="497" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="352" y1="506" x2="364" y2="518" stroke="#64748b" stroke-width="2"/>
+  <line x1="364" y1="506" x2="352" y2="518" stroke="#64748b" stroke-width="2"/>
+  <text class="t" x="376" y="516" font-size="10" fill="#64748b">无铃</text>
+  <rect x="412" y="598" width="54" height="18" rx="9" fill="#0f172a"/>
+  <text class="t name" x="439" y="611" text-anchor="middle" font-size="10">Vue 2</text>
+
+  <!-- 阿R 气泡 -->
+  <rect x="56" y="472" width="56" height="24" rx="12" fill="#0369a1"/>
+  <text class="t name" x="84" y="489" text-anchor="middle">阿R</text>
+  <rect x="44" y="498" width="200" height="92" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="240,542 240,566 260,554" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="236" y="546" width="8" height="16" fill="#ffffff"/>
+  <text class="t dlg" x="60" y="524">Object.</text>
+  <text class="t dlg" x="60" y="548">defineProperty</text>
+  <text class="t dlg" x="60" y="572">新增属性没门铃</text>
+
+  <!-- 换门箭头 -->
+  <line x1="470" y1="580" x2="556" y2="580" stroke="#334155" stroke-width="3" stroke-dasharray="6,4"/>
+  <polygon points="556,572 556,588 572,580" fill="#334155"/>
+  <text class="t" x="514" y="562" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f766e">3.5 换门！</text>
+  <text class="t" x="514" y="604" text-anchor="middle" font-size="11" fill="#94a3b8">$set 退场</text>
+
+  <!-- 新门：Proxy 整门代理 -->
+  <rect x="776" y="544" width="130" height="88" rx="8" fill="#ecfdf5" stroke="#0ea56d" stroke-width="3"/>
+  <rect x="788" y="552" width="106" height="20" rx="5" fill="#0f766e"/>
+  <text class="t name" x="832" y="566" text-anchor="middle" font-size="12">Proxy 代理</text>
+  <circle cx="882" cy="562" r="9" fill="#fef08a" opacity="0.55"/>
+  <circle cx="882" cy="562" r="6" fill="#fbbf24" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="788" y="580" width="106" height="20" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <circle cx="798" cy="590" r="4" fill="#16a34a"/>
+  <text class="t" x="846" y="594" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#166534">新增属性也响</text>
+  <rect x="788" y="606" width="106" height="20" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <circle cx="798" cy="616" r="4" fill="#16a34a"/>
+  <text class="t" x="846" y="620" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#166534">数组下标也响</text>
+  <rect x="912" y="612" width="58" height="18" rx="9" fill="#0f766e"/>
+  <text class="t name" x="941" y="625" text-anchor="middle" font-size="9.5">Vue 3.5</text>
+
+  <!-- 阿V（整组复制，只改 transform） -->
+  <g transform="translate(640,572)">
+    <ellipse cx="0" cy="60" rx="50" ry="10" fill="#e2e8f0"/>
+    <circle cx="0" cy="-14" r="37" fill="#0ea56d" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="0" cy="-10" r="29" fill="#ffe3c9" stroke="#334155" stroke-width="3"/>
+    <path d="M -37 -20 Q 0 -64 37 -20 L 37 -6 Q 20 -30 0 -30 Q -20 -30 -37 -6 Z" fill="#0ea56d" stroke="#334155" stroke-width="3"/>
+    <circle cx="-10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="10" cy="-12" r="4" fill="#0f172a"/>
+    <circle cx="-18" cy="-2" r="4" fill="#fca5a5"/>
+    <circle cx="18" cy="-2" r="4" fill="#fca5a5"/>
+    <path d="M -8 0 Q 0 6 8 0" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M -26 22 L 26 22 L 36 58 L -36 58 Z" fill="#42b883" stroke="#334155" stroke-width="3.5"/>
+    <circle cx="-27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <circle cx="27" cy="30" r="6" fill="#ffe3c9" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-20" y="-62" width="40" height="16" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+    <rect x="-14" y="-74" width="28" height="14" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  </g>
+  <!-- 阿V 指向新门的手臂 -->
+  <line x1="726" y1="600" x2="770" y2="588" stroke="#334155" stroke-width="9" stroke-linecap="round"/>
+  <line x1="726" y1="600" x2="770" y2="588" stroke="#ffe3c9" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="772" cy="587" r="5" fill="#ffe3c9" stroke="#334155" stroke-width="2"/>
+
+  <!-- 阿V 气泡 -->
+  <rect x="744" y="462" width="56" height="24" rx="12" fill="#0f766e"/>
+  <text class="t name" x="772" y="479" text-anchor="middle">阿V</text>
+  <rect x="732" y="488" width="252" height="54" rx="12" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <polygon points="732,500 732,522 712,511" fill="#ffffff" stroke="#334155" stroke-width="2.5"/>
+  <rect x="728" y="504" width="8" height="14" fill="#ffffff"/>
+  <text class="t dlg" x="748" y="510">Proxy 整门代理，</text>
+  <text class="t dlg" x="748" y="530">新增下标都响，免 $set</text>
+
+  <!-- 知识条：码叔划重点 -->
+  <rect x="40" y="656" width="1120" height="112" rx="16" fill="#0f172a"/>
+  <g transform="translate(105,712)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-26,-22 -14,-34 -10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <polygon points="26,-22 14,-34 10,-20" fill="#f59e0b" stroke="#78350f" stroke-width="2.5"/>
+    <circle cx="-11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="11" cy="-6" r="11" fill="#fffbeb" stroke="#78350f" stroke-width="2"/>
+    <circle cx="-11" cy="-6" r="4" fill="#0f172a"/>
+    <circle cx="11" cy="-6" r="4" fill="#0f172a"/>
+    <polygon points="0,0 -6,9 6,9" fill="#f97316" stroke="#78350f" stroke-width="2"/>
+    <path d="M -18 12 Q 0 22 18 12" stroke="#78350f" stroke-width="2.5" fill="none"/>
+  </g>
+  <text class="t sh" x="155" y="688">码叔划重点</text>
+  <text class="t sb" x="155" y="716">• Vue 3.5 用 Dep 与 Link 双向链表替代 subs Set：依赖就是 effect 与 dep 之间的连线</text>
+  <text class="t sb" x="155" y="740">• get 时 track 建立 Link，set 时 trigger 沿链通知，computed 惰性求值</text>
+  <text class="t sb" x="155" y="764">• Proxy 一次代理整个对象，新增属性与数组下标自动响应，无需 $set</text>
+</svg>
